@@ -201,6 +201,7 @@ SRMiggy2.0/
 - **API connection errors**: Ensure backend is running on port 8080
 - **CORS errors**: Check CORS configuration in SecurityConfig
 - **Build errors**: Delete `node_modules` and run `npm install` again
+- **M4 Mac compatibility**: This project uses standard Vite (v6.x) which has native Apple Silicon support. If you encounter issues, ensure you're using Node.js 16+ and run `npm install` to get the correct dependencies
 
 ## 📝 Notes
 
