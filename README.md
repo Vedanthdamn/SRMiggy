@@ -94,7 +94,7 @@ The application comes with pre-seeded data for testing:
 ## 📊 Seeded Data
 
 - **5 Vendors**: Biryani House, Dosa Corner, Burger Junction, Pizza Paradise, Thali Express
-- **30 Menu Items**: 6 items per vendor with images and descriptions
+- **80 Menu Items**: 16 items per vendor with images and descriptions
 - **3 Delivery Slots**: Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
 
