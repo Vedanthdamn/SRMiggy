@@ -1,10 +1,28 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useState, useEffect } from 'react';
+import { walletAPI } from '../utils/api';
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const { getItemCount } = useCart();
+  const [walletBalance, setWalletBalance] = useState(0);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadWalletBalance();
+    }
+  }, [isAuthenticated]);
+
+  const loadWalletBalance = async () => {
+    try {
+      const response = await walletAPI.getBalance();
+      setWalletBalance(response.data);
+    } catch (error) {
+      console.error('Error loading wallet balance:', error);
+    }
+  };
 
   return (
     <nav className="bg-white shadow-lg">
@@ -19,6 +37,10 @@ const Navbar = () => {
               <>
                 <Link to="/" className="text-gray-700 hover:text-primary">
                   Home
+                </Link>
+                <Link to="/wallet" className="text-gray-700 hover:text-primary flex items-center">
+                  <span className="mr-1">💰</span>
+                  <span>₹{walletBalance.toFixed(2)}</span>
                 </Link>
                 <Link to="/orders" className="text-gray-700 hover:text-primary">
                   My Orders

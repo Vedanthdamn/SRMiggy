@@ -44,4 +44,17 @@ public class PaymentController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/pay-with-wallet")
+    public ResponseEntity<PaymentTransaction> payWithWallet(
+            @RequestParam Long orderId,
+            org.springframework.security.core.Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            PaymentTransaction transaction = paymentService.payWithWallet(orderId, username);
+            return ResponseEntity.ok(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
