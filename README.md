@@ -7,7 +7,7 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **User Authentication**: JWT-based secure authentication with role-based access (Customer, Vendor, Admin, Rider)
 - **Vendor Management**: Browse multiple vendors and their menus
 - **Shopping Cart**: Add items to cart with real-time updates
-- **Delivery Slots**: Fixed time slots for efficient delivery (11:00 AM - 9:00 PM in 30-minute intervals)
+- **Delivery Slots**: Fixed time slots for efficient delivery (7:00-7:30 PM, 7:30-8:00 PM, 8:00-8:30 PM)
 - **Order Management**: Place orders with minimum value validation (₹100 + ₹2 platform fee)
 - **Payment Integration**: Mock payment provider for testing
 - **Admin Dashboard**: View statistics, manage orders and vendors
@@ -102,8 +102,6 @@ The application comes with pre-seeded data for testing:
   - Roll Junction (Rolls & Wraps)
   - Ice Cream Parlor (Ice Creams)
   - Dessert House (Desserts)
-- **50+ Menu Items**: With proper veg/non-veg classification
-- **20 Delivery Slots**: 11:00 AM to 9:00 PM in 30-minute intervals
 - **128 Menu Items**: 16 items per vendor with proper veg/non-veg classification and affordable options under ₹100
 - **3 Delivery Slots**: Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
