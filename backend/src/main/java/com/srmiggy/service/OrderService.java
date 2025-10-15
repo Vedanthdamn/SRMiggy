@@ -35,6 +35,7 @@ public class OrderService {
 
     private static final Double MINIMUM_ORDER_VALUE = 100.0;
     private static final Double PLATFORM_FEE = 2.0;
+    private static final Double DELIVERY_FEE = 10.0;
     private static final Integer CUTOFF_MINUTES = 50;
 
     @Transactional
@@ -83,13 +84,13 @@ public class OrderService {
             subtotal += orderItem.getSubtotal();
         }
 
-        if (subtotal < MINIMUM_ORDER_VALUE) {
-            throw new RuntimeException("Minimum order value is ₹" + MINIMUM_ORDER_VALUE);
-        }
-
+        // Calculate delivery fee - apply ₹10 if subtotal < 100
+        double deliveryFee = subtotal < 100.0 ? DELIVERY_FEE : 0.0;
+        
         order.setSubtotal(subtotal);
+        order.setDeliveryFee(deliveryFee);
         order.setPlatformFee(PLATFORM_FEE);
-        order.setTotal(subtotal + PLATFORM_FEE);
+        order.setTotal(subtotal + deliveryFee + PLATFORM_FEE);
 
         return orderRepository.save(order);
     }

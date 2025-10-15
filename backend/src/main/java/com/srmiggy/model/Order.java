@@ -42,6 +42,9 @@ public class Order {
     private Double subtotal;
 
     @Column(nullable = false)
+    private Double deliveryFee = 0.0;
+
+    @Column(nullable = false)
     private Double platformFee = 2.0;
 
     @Column(nullable = false)

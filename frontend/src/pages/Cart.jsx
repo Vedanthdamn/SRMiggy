@@ -6,14 +6,12 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const PLATFORM_FEE = 2;
+  const DELIVERY_FEE = 10;
   const subtotal = getTotal();
-  const total = subtotal + PLATFORM_FEE;
+  const deliveryFee = subtotal < 100 ? DELIVERY_FEE : 0;
+  const total = subtotal + deliveryFee + PLATFORM_FEE;
 
   const handleCheckout = () => {
-    if (subtotal < 100) {
-      alert('Minimum order value is ₹100');
-      return;
-    }
     navigate('/checkout');
   };
 
@@ -92,6 +90,12 @@ const Cart = () => {
               <span>Subtotal</span>
               <span>₹{subtotal.toFixed(2)}</span>
             </div>
+            {subtotal < 100 && (
+              <div className="flex justify-between text-gray-700">
+                <span>Delivery Fee (orders below ₹100)</span>
+                <span>₹{deliveryFee.toFixed(2)}</span>
+              </div>
+            )}
             <div className="flex justify-between text-gray-700">
               <span>Platform Fee</span>
               <span>₹{PLATFORM_FEE.toFixed(2)}</span>
@@ -102,15 +106,14 @@ const Cart = () => {
             </div>
             {subtotal < 100 && (
               <p className="text-red-600 text-sm">
-                Minimum order value is ₹100. Add ₹{(100 - subtotal).toFixed(2)} more.
+                Minimum order value is ₹100. Add ₹{(100 - subtotal).toFixed(2)} more to avoid delivery fee.
               </p>
             )}
           </div>
 
           <button
             onClick={handleCheckout}
-            disabled={subtotal < 100}
-            className="w-full mt-6 bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-6 bg-primary text-white py-3 rounded-lg hover:bg-opacity-90"
           >
             Proceed to Checkout
           </button>
