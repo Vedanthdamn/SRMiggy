@@ -1,5 +1,7 @@
 # SRMiggy - Campus Food Delivery Platform
 
+[![Build and Test](https://github.com/Vedanthdamn/SRMiggy/actions/workflows/build.yml/badge.svg)](https://github.com/Vedanthdamn/SRMiggy/actions/workflows/build.yml)
+
 SRMiggy is a full-stack food delivery website designed for SRM students to order food online from Java Canteen vendors and get it delivered to their doorstep.
 
 ## 🚀 Features
@@ -421,6 +423,50 @@ mvn spring-boot:run -Dspring-boot.run.profiles=supabase
 ```
 
 See detailed guides for complete instructions.
+
+## 🔄 Continuous Integration / Continuous Deployment (CI/CD)
+
+The project uses GitHub Actions for automated builds and testing.
+
+### Build Workflow
+
+The workflow automatically runs on:
+- Push to `main` or `develop` branches
+- Pull requests targeting `main` or `develop` branches
+
+### What Gets Built and Tested
+
+**Backend:**
+- Compiles Java code with Maven
+- Runs unit tests
+- Packages the application as a JAR file
+- Uploads the JAR artifact for 7 days
+
+**Frontend:**
+- Installs npm dependencies
+- Runs ESLint for code quality
+- Builds the production bundle with Vite
+- Uploads the build artifact for 7 days
+
+### Viewing Build Status
+
+Check the build status badge at the top of this README or visit the [Actions tab](https://github.com/Vedanthdamn/SRMiggy/actions) in the repository.
+
+### Local Build Verification
+
+To verify builds locally before pushing:
+
+```bash
+# Backend
+cd backend
+mvn clean package
+
+# Frontend
+cd frontend
+npm install
+npm run lint
+npm run build
+```
 
 ## 👥 Contributors
 
