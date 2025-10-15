@@ -7,7 +7,7 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **User Authentication**: JWT-based secure authentication with role-based access (Customer, Vendor, Admin, Rider)
 - **Vendor Management**: Browse multiple vendors and their menus
 - **Shopping Cart**: Add items to cart with real-time updates
-- **Delivery Slots**: Fixed time slots for efficient delivery (7:00-7:30 PM, 7:30-8:00 PM, 8:00-8:30 PM)
+- **Delivery Slots**: Fixed time slots for efficient delivery (Morning: 8:00-8:30 AM, 8:30-9:00 AM, 9:00-9:30 AM | Evening: 7:00-7:30 PM, 7:30-8:00 PM, 8:00-8:30 PM)
 - **Order Management**: Place orders with minimum value validation (₹100 + ₹2 platform fee)
 - **Payment Integration**: Mock payment provider for testing
 - **Admin Dashboard**: View statistics, manage orders and vendors
@@ -95,7 +95,7 @@ The application comes with pre-seeded data for testing:
 
 - **5 Vendors**: Biryani House, Dosa Corner, Burger Junction, Pizza Paradise, Thali Express
 - **30 Menu Items**: 6 items per vendor with images and descriptions
-- **3 Delivery Slots**: Evening time slots
+- **6 Delivery Slots**: Morning and Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
 
 ## 🔄 Complete User Flow

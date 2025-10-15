@@ -42,7 +42,12 @@ public class DataInitializer implements CommandLineRunner {
         User vendor1User = createUser("vendor1", "vendor1@srmiggy.com", "password", "Raj Kumar", 
                 "9876543212", "Shop 1", UserRole.VENDOR);
 
-        // Create delivery slots
+        // Create delivery slots - Morning slots
+        createDeliverySlot(LocalTime.of(8, 0), LocalTime.of(8, 30), "8:00 AM - 8:30 AM");
+        createDeliverySlot(LocalTime.of(8, 30), LocalTime.of(9, 0), "8:30 AM - 9:00 AM");
+        createDeliverySlot(LocalTime.of(9, 0), LocalTime.of(9, 30), "9:00 AM - 9:30 AM");
+        
+        // Evening slots
         createDeliverySlot(LocalTime.of(19, 0), LocalTime.of(19, 30), "7:00 PM - 7:30 PM");
         createDeliverySlot(LocalTime.of(19, 30), LocalTime.of(20, 0), "7:30 PM - 8:00 PM");
         createDeliverySlot(LocalTime.of(20, 0), LocalTime.of(20, 30), "8:00 PM - 8:30 PM");
