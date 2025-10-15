@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { slotAPI, orderAPI, paymentAPI, walletAPI } from '../utils/api';
@@ -8,6 +8,7 @@ const Checkout = () => {
   const { cart, vendorId, getTotal, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState('');
@@ -16,6 +17,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('mock');
   const [walletBalance, setWalletBalance] = useState(0);
+  const useLoyaltyPoints = location.state?.useLoyaltyPoints || false;
 
   useEffect(() => {
     loadSlots();
@@ -68,6 +70,7 @@ const Checkout = () => {
           menuItemId: item.id,
           quantity: item.quantity,
         })),
+        useLoyaltyPoints: useLoyaltyPoints,
       };
 
       const orderResponse = await orderAPI.create(orderData);

@@ -40,6 +40,9 @@ public class User {
     @Column(nullable = false)
     private Double walletBalance = 0.0;
 
+    @Column(nullable = false)
+    private Double loyaltyPoints = 0.0;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

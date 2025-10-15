@@ -1,8 +1,10 @@
 package com.srmiggy.controller;
 
 import com.srmiggy.dto.AddMoneyRequest;
+import com.srmiggy.dto.LoyaltyPointsResponse;
 import com.srmiggy.dto.WalletResponse;
 import com.srmiggy.model.WalletTransaction;
+import com.srmiggy.service.LoyaltyService;
 import com.srmiggy.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class WalletController {
 
     @Autowired
     private WalletService walletService;
+
+    @Autowired
+    private LoyaltyService loyaltyService;
 
     @PostMapping("/add-money")
     public ResponseEntity<WalletResponse> addMoney(
@@ -50,6 +55,31 @@ public class WalletController {
             String username = authentication.getName();
             List<WalletTransaction> transactions = walletService.getTransactions(username);
             return ResponseEntity.ok(transactions);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/loyalty-points")
+    public ResponseEntity<Double> getLoyaltyPoints(Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            Double points = loyaltyService.getLoyaltyPoints(username);
+            return ResponseEntity.ok(points);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/calculate-loyalty-points")
+    public ResponseEntity<LoyaltyPointsResponse> calculateLoyaltyPoints(
+            @RequestParam Double orderTotal,
+            Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            Double currentPoints = loyaltyService.getLoyaltyPoints(username);
+            Double pointsEarned = loyaltyService.calculatePointsEarned(orderTotal);
+            return ResponseEntity.ok(new LoyaltyPointsResponse(currentPoints, pointsEarned));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

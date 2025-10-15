@@ -50,6 +50,12 @@ public class Order {
     @Column(nullable = false)
     private Double total;
 
+    @Column(nullable = false)
+    private Double loyaltyPointsUsed = 0.0;
+
+    @Column(nullable = false)
+    private Double loyaltyPointsEarned = 0.0;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status = OrderStatus.PENDING;

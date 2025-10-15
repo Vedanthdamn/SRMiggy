@@ -62,6 +62,8 @@ export const walletAPI = {
   addMoney: (amount) => api.post('/wallet/add-money', { amount }),
   getBalance: () => api.get('/wallet/balance'),
   getTransactions: () => api.get('/wallet/transactions'),
+  getLoyaltyPoints: () => api.get('/wallet/loyalty-points'),
+  calculateLoyaltyPoints: (orderTotal) => api.get(`/wallet/calculate-loyalty-points?orderTotal=${orderTotal}`),
 };
 
 export default api;

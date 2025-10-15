@@ -26,6 +26,9 @@ public class PaymentService {
     @Autowired
     private WalletService walletService;
 
+    @Autowired
+    private LoyaltyService loyaltyService;
+
     @Transactional
     public PaymentOrderResponse createPaymentOrder(Long orderId) {
         Order order = orderRepository.findById(orderId)
@@ -72,6 +75,14 @@ public class PaymentService {
         order.setStatus(OrderStatus.CONFIRMED);
         orderRepository.save(order);
 
+        // Award loyalty points to customer
+        if (order.getLoyaltyPointsEarned() > 0) {
+            loyaltyService.addLoyaltyPoints(
+                order.getCustomer().getUsername(), 
+                order.getLoyaltyPointsEarned()
+            );
+        }
+
         return paymentTransactionRepository.save(transaction);
     }
 
@@ -106,6 +117,11 @@ public class PaymentService {
         // Update order status
         order.setStatus(OrderStatus.CONFIRMED);
         orderRepository.save(order);
+
+        // Award loyalty points to customer
+        if (order.getLoyaltyPointsEarned() > 0) {
+            loyaltyService.addLoyaltyPoints(username, order.getLoyaltyPointsEarned());
+        }
 
         return paymentTransactionRepository.save(transaction);
     }
