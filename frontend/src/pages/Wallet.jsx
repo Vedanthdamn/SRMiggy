@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { walletAPI } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
 
 const Wallet = () => {
-  const { user } = useAuth();
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [amount, setAmount] = useState('');
