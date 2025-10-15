@@ -104,6 +104,8 @@ The application comes with pre-seeded data for testing:
   - Dessert House (Desserts)
 - **50+ Menu Items**: With proper veg/non-veg classification
 - **20 Delivery Slots**: 11:00 AM to 9:00 PM in 30-minute intervals
+- **128 Menu Items**: 16 items per vendor with proper veg/non-veg classification and affordable options under ₹100
+- **3 Delivery Slots**: Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
 
 ## 🔄 Complete User Flow
