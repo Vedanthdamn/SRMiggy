@@ -9,7 +9,8 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **Shopping Cart**: Add items to cart with real-time updates
 - **Delivery Slots**: Fixed time slots for efficient delivery (7:00-7:30 PM, 7:30-8:00 PM, 8:00-8:30 PM)
 - **Order Management**: Place orders with minimum value validation (₹100 + ₹2 platform fee)
-- **Payment Integration**: Mock payment provider for testing
+- **Digital Wallet**: Students can add money to their wallet and use it for payments
+- **Payment Integration**: Supports both wallet payment and mock payment provider for testing
 - **Admin Dashboard**: View statistics, manage orders and vendors
 - **Mobile-First Design**: Responsive UI built with Tailwind CSS
 
@@ -112,9 +113,10 @@ The application comes with pre-seeded data for testing:
 2. **View Menu**: Click on a vendor to view their menu items
 3. **Add to Cart**: Select items and add them to your cart
 4. **Checkout**: Proceed to checkout, select delivery slot and address
-5. **Payment**: Complete mock payment (automatic)
+5. **Payment**: Choose between wallet payment or other payment methods
 6. **Order Confirmation**: Receive order confirmation with order ID
 7. **Track Orders**: View order history and status in "My Orders"
+8. **Manage Wallet**: Add money to wallet and view transaction history
 
 ## 🎯 Business Rules
 
@@ -145,7 +147,13 @@ The application comes with pre-seeded data for testing:
 ### Payments
 - `POST /api/payments/create-order` - Create payment order
 - `POST /api/payments/verify` - Verify payment
+- `POST /api/payments/pay-with-wallet` - Pay with wallet balance
 - `GET /api/payments/order/{orderId}` - Get payment status
+
+### Wallet
+- `POST /api/wallet/add-money` - Add money to wallet
+- `GET /api/wallet/balance` - Get wallet balance
+- `GET /api/wallet/transactions` - Get transaction history
 
 ### Admin (Requires ADMIN role)
 - `GET /api/admin/orders` - Get all orders
