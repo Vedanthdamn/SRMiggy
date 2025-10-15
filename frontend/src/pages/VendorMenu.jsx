@@ -8,6 +8,7 @@ const VendorMenu = () => {
   const [vendor, setVendor] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filterType, setFilterType] = useState('all'); // 'all', 'veg', 'non-veg'
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -35,6 +36,13 @@ const VendorMenu = () => {
       alert('Added to cart!');
     }
   };
+
+  // Filter menu items based on selected filter type
+  const filteredMenuItems = menuItems.filter((item) => {
+    if (filterType === 'veg') return item.isVeg === true;
+    if (filterType === 'non-veg') return item.isVeg === false;
+    return true; // 'all' - show everything
+  });
 
   if (loading) {
     return (
@@ -67,9 +75,56 @@ const VendorMenu = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Menu</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Menu</h2>
+          
+          {/* Toggle Filter Buttons */}
+          <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
+            <button
+              onClick={() => setFilterType('all')}
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-300 ${
+                filterType === 'all'
+                  ? 'bg-white text-gray-900 shadow-md'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilterType('veg')}
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-300 flex items-center space-x-1 ${
+                filterType === 'veg'
+                  ? 'bg-green-100 text-green-700 shadow-md'
+                  : 'text-gray-600 hover:text-green-700'
+              }`}
+            >
+              <span className="text-lg">🟢</span>
+              <span>Veg</span>
+            </button>
+            <button
+              onClick={() => setFilterType('non-veg')}
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-300 flex items-center space-x-1 ${
+                filterType === 'non-veg'
+                  ? 'bg-red-100 text-red-700 shadow-md'
+                  : 'text-gray-600 hover:text-red-700'
+              }`}
+            >
+              <span className="text-lg">🔴</span>
+              <span>Non-Veg</span>
+            </button>
+          </div>
+        </div>
+        
+        {/* Items count indicator */}
+        {filterType !== 'all' && (
+          <div className="mb-4 text-sm text-gray-600">
+            Showing {filteredMenuItems.length} {filterType === 'veg' ? 'vegetarian' : 'non-vegetarian'} {filteredMenuItems.length === 1 ? 'item' : 'items'}
+          </div>
+        )}
+        
+        {/* Menu Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {menuItems.map((item) => (
+          {filteredMenuItems.map((item) => (
             <div
               key={item.id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
