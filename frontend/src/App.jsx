@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
+import Welcome from './components/Welcome';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -14,11 +16,27 @@ import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  useEffect(() => {
+    // Check if user has seen welcome screen in this session
+    const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+    if (hasSeenWelcome) {
+      setShowWelcome(false);
+    }
+  }, []);
+
+  const handleWelcomeComplete = () => {
+    sessionStorage.setItem('hasSeenWelcome', 'true');
+    setShowWelcome(false);
+  };
+
   return (
     <Router>
       <AuthProvider>
         <CartProvider>
-          <div className="min-h-screen bg-gray-50">
+          {showWelcome && <Welcome onComplete={handleWelcomeComplete} />}
+          <div className="min-h-screen bg-gray-50" style={{ visibility: showWelcome ? 'hidden' : 'visible' }}>
             <Navbar />
             <Routes>
               <Route path="/login" element={<Login />} />
