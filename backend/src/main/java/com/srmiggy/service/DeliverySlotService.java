@@ -21,13 +21,13 @@ public class DeliverySlotService {
     /**
      * Get available slots based on current time
      * Returns slots that start after the current time and before 7:00 PM
-     * Returns empty list if current time is after 7:00 PM
+     * Returns empty list if current time is after 7:00 PM or before 11:00 AM
      */
     public List<DeliverySlot> getAvailableSlots() {
         LocalTime now = LocalTime.now();
         
-        // If current time is after 7:00 PM, no slots are available
-        if (now.isAfter(ORDERING_END_TIME)) {
+        // If current time is after 7:00 PM or before 11:00 AM, no slots are available
+        if (now.isAfter(ORDERING_END_TIME) || now.isBefore(ORDERING_START_TIME)) {
             return List.of();
         }
         
