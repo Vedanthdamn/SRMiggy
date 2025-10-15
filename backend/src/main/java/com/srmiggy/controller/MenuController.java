@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/menu")
@@ -22,14 +23,14 @@ public class MenuController {
     private VendorRepository vendorRepository;
 
     @GetMapping("/vendor/{vendorId}")
-    public ResponseEntity<List<MenuItem>> getMenuByVendor(@PathVariable Long vendorId) {
+    public ResponseEntity<List<MenuItem>> getMenuByVendor(@PathVariable UUID vendorId) {
         return vendorRepository.findById(vendorId)
                 .map(vendor -> ResponseEntity.ok(menuItemRepository.findByVendorAndAvailableTrue(vendor)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MenuItem> getMenuItemById(@PathVariable Long id) {
+    public ResponseEntity<MenuItem> getMenuItemById(@PathVariable UUID id) {
         return menuItemRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

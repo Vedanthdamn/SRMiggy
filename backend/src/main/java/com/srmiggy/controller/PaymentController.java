@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/payments")
 @CrossOrigin
@@ -17,7 +19,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<PaymentOrderResponse> createPaymentOrder(@RequestParam Long orderId) {
+    public ResponseEntity<PaymentOrderResponse> createPaymentOrder(@RequestParam UUID orderId) {
         try {
             PaymentOrderResponse response = paymentService.createPaymentOrder(orderId);
             return ResponseEntity.ok(response);
@@ -37,7 +39,7 @@ public class PaymentController {
     }
 
     @GetMapping("/order/{orderId}")
-    public ResponseEntity<PaymentTransaction> getPaymentByOrderId(@PathVariable Long orderId) {
+    public ResponseEntity<PaymentTransaction> getPaymentByOrderId(@PathVariable UUID orderId) {
         PaymentTransaction transaction = paymentService.getPaymentByOrderId(orderId);
         if (transaction != null) {
             return ResponseEntity.ok(transaction);
@@ -47,7 +49,7 @@ public class PaymentController {
 
     @PostMapping("/pay-with-wallet")
     public ResponseEntity<PaymentTransaction> payWithWallet(
-            @RequestParam Long orderId,
+            @RequestParam UUID orderId,
             org.springframework.security.core.Authentication authentication) {
         try {
             String username = authentication.getName();

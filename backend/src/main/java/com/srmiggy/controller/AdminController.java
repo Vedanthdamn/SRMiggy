@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -68,7 +69,7 @@ public class AdminController {
     }
 
     @PutMapping("/orders/{id}/status")
-    public ResponseEntity<Order> updateOrderStatus(@PathVariable Long id, @RequestParam OrderStatus status) {
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable UUID id, @RequestParam OrderStatus status) {
         try {
             Order order = orderService.updateOrderStatus(id, status);
             return ResponseEntity.ok(order);

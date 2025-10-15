@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -125,13 +126,13 @@ public class OrderService {
         return orderRepository.findByCustomerOrderByCreatedAtDesc(customer);
     }
 
-    public List<Order> getVendorOrders(Long vendorId) {
+    public List<Order> getVendorOrders(UUID vendorId) {
         Vendor vendor = vendorRepository.findById(vendorId)
                 .orElseThrow(() -> new RuntimeException("Vendor not found"));
         return orderRepository.findByVendor(vendor);
     }
 
-    public Order getOrderById(Long orderId, String username) {
+    public Order getOrderById(UUID orderId, String username) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
@@ -152,7 +153,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order updateOrderStatus(Long orderId, OrderStatus status) {
+    public Order updateOrderStatus(UUID orderId, OrderStatus status) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         order.setStatus(status);

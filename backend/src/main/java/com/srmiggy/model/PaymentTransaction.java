@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "payment_transactions")
@@ -14,8 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaymentTransaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @OneToOne
     @JoinColumn(name = "order_id", nullable = false)
