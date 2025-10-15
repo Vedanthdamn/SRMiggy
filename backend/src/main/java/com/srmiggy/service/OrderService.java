@@ -33,6 +33,9 @@ public class OrderService {
     @Autowired
     private SettingsRepository settingsRepository;
 
+    @Autowired
+    private LoyaltyService loyaltyService;
+
     private static final Double MINIMUM_ORDER_VALUE = 100.0;
     private static final Double PLATFORM_FEE = 2.0;
     private static final Double DELIVERY_FEE = 10.0;
@@ -90,7 +93,28 @@ public class OrderService {
         order.setSubtotal(subtotal);
         order.setDeliveryFee(deliveryFee);
         order.setPlatformFee(PLATFORM_FEE);
-        order.setTotal(subtotal + deliveryFee + PLATFORM_FEE);
+        
+        double total = subtotal + deliveryFee + PLATFORM_FEE;
+        
+        // Handle loyalty points redemption
+        double loyaltyDiscount = 0.0;
+        if (request.getUseLoyaltyPoints() != null && request.getUseLoyaltyPoints()) {
+            Double availablePoints = loyaltyService.getLoyaltyPoints(username);
+            if (availablePoints > 0) {
+                // Use all available points (capped at total amount)
+                double pointsToUse = Math.min(availablePoints, total);
+                loyaltyDiscount = loyaltyService.redeemLoyaltyPoints(username, pointsToUse);
+                order.setLoyaltyPointsUsed(pointsToUse);
+            }
+        }
+        
+        // Calculate final total after loyalty discount
+        total = total - loyaltyDiscount;
+        order.setTotal(total);
+        
+        // Calculate and save loyalty points earned from this order
+        Double pointsEarned = loyaltyService.calculatePointsEarned(subtotal);
+        order.setLoyaltyPointsEarned(pointsEarned);
 
         return orderRepository.save(order);
     }

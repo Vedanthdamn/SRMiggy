@@ -15,4 +15,5 @@ public class CreateOrderRequest {
     private String deliveryAddress;
     private String customerPhone;
     private List<CartItemRequest> items;
+    private Boolean useLoyaltyPoints = false;
 }

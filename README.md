@@ -11,8 +11,33 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **Order Management**: Place orders with minimum value validation (₹100 + ₹2 platform fee)
 - **Digital Wallet**: Students can add money to their wallet and use it for payments
 - **Payment Integration**: Supports both wallet payment and mock payment provider for testing
+- **Campus Loyalty Program**: Earn points on every order and redeem them for discounts (see below)
 - **Admin Dashboard**: View statistics, manage orders and vendors
 - **Mobile-First Design**: Responsive UI built with Tailwind CSS
+
+## 🏫 Campus Loyalty Program
+
+SRMiggy rewards students for every order with our Campus Loyalty Program!
+
+### How It Works:
+- **Earn Points**: Get 0.5 loyalty points for every ₹100 spent on food
+- **Redeem Points**: Use your points for discounts (1 point = ₹1 off)
+- **Automatic Tracking**: Points are automatically added to your account after successful payment
+- **Flexible Usage**: Toggle points on/off in the cart to choose when to redeem
+
+### Using Loyalty Points:
+1. Add items to your cart and proceed to cart page
+2. View your available loyalty points and points you'll earn from this order
+3. Toggle "Use Loyalty Points" to apply your points as a discount
+4. Your points will be deducted from the order total at checkout
+5. After payment, new points from this order are automatically credited to your account
+
+### Example:
+- Order total: ₹200
+- Available points: 50 pts
+- Toggle on to save ₹50
+- Final total: ₹150
+- After payment, earn 1 point (0.5 × 2) from this ₹200 order
 
 ## 📋 Tech Stack
 
@@ -154,6 +179,8 @@ The application comes with pre-seeded data for testing:
 - `POST /api/wallet/add-money` - Add money to wallet
 - `GET /api/wallet/balance` - Get wallet balance
 - `GET /api/wallet/transactions` - Get transaction history
+- `GET /api/wallet/loyalty-points` - Get current loyalty points
+- `GET /api/wallet/calculate-loyalty-points?orderTotal={amount}` - Calculate points for an order
 
 ### Admin (Requires ADMIN role)
 - `GET /api/admin/orders` - Get all orders

@@ -1,18 +1,44 @@
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useState, useEffect } from 'react';
+import { walletAPI } from '../utils/api';
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart, getTotal, clearCart } = useCart();
   const navigate = useNavigate();
+  const [loyaltyPoints, setLoyaltyPoints] = useState(0);
+  const [pointsToEarn, setPointsToEarn] = useState(0);
+  const [useLoyaltyPoints, setUseLoyaltyPoints] = useState(false);
 
   const PLATFORM_FEE = 2;
   const DELIVERY_FEE = 10;
   const subtotal = getTotal();
   const deliveryFee = subtotal < 100 ? DELIVERY_FEE : 0;
-  const total = subtotal + deliveryFee + PLATFORM_FEE;
+  let total = subtotal + deliveryFee + PLATFORM_FEE;
+
+  // Calculate loyalty discount
+  const loyaltyDiscount = useLoyaltyPoints ? Math.min(loyaltyPoints, total) : 0;
+  total = total - loyaltyDiscount;
+
+  useEffect(() => {
+    loadLoyaltyInfo();
+  }, [subtotal]);
+
+  const loadLoyaltyInfo = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      const response = await walletAPI.calculateLoyaltyPoints(subtotal);
+      setLoyaltyPoints(response.data.currentPoints);
+      setPointsToEarn(response.data.pointsEarnedFromOrder);
+    } catch (error) {
+      console.error('Error loading loyalty info:', error);
+    }
+  };
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate('/checkout', { state: { useLoyaltyPoints } });
   };
 
   if (cart.length === 0) {
@@ -100,6 +126,12 @@ const Cart = () => {
               <span>Platform Fee</span>
               <span>₹{PLATFORM_FEE.toFixed(2)}</span>
             </div>
+            {loyaltyDiscount > 0 && (
+              <div className="flex justify-between text-green-600">
+                <span>Loyalty Discount</span>
+                <span>-₹{loyaltyDiscount.toFixed(2)}</span>
+              </div>
+            )}
             <div className="flex justify-between text-xl font-bold text-gray-900">
               <span>Total</span>
               <span>₹{total.toFixed(2)}</span>
@@ -108,6 +140,56 @@ const Cart = () => {
               <p className="text-red-600 text-sm">
                 Minimum order value is ₹100. Add ₹{(100 - subtotal).toFixed(2)} more to avoid delivery fee.
               </p>
+            )}
+          </div>
+
+          {/* Campus Loyalty Program Section */}
+          <div className="border-t mt-4 pt-4">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-4">
+              <div className="flex items-center mb-2">
+                <span className="text-2xl mr-2">🏫</span>
+                <h3 className="font-semibold text-gray-900">Campus Loyalty Program</h3>
+              </div>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-700">Available Points:</span>
+                  <span className="font-semibold text-blue-600">{loyaltyPoints.toFixed(1)} pts (₹{loyaltyPoints.toFixed(2)})</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-700">You'll Earn:</span>
+                  <span className="font-semibold text-green-600">+{pointsToEarn.toFixed(1)} pts</span>
+                </div>
+                <p className="text-xs text-gray-600 mt-2">
+                  Earn 0.5 points for every ₹100 spent • 1 point = ₹1 discount
+                </p>
+              </div>
+            </div>
+
+            {loyaltyPoints > 0 && (
+              <div className="flex items-center justify-between p-3 bg-white border-2 border-gray-200 rounded-lg hover:border-blue-300 transition-colors">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-12 h-6 rounded-full transition-colors duration-300 ${
+                    useLoyaltyPoints ? 'bg-blue-600' : 'bg-gray-300'
+                  } relative cursor-pointer`}
+                  onClick={() => setUseLoyaltyPoints(!useLoyaltyPoints)}
+                  >
+                    <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                      useLoyaltyPoints ? 'transform translate-x-6' : ''
+                    }`}></div>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Use Loyalty Points</p>
+                    <p className="text-xs text-gray-600">
+                      {useLoyaltyPoints ? `Applying ${Math.min(loyaltyPoints, subtotal + deliveryFee + PLATFORM_FEE).toFixed(1)} pts` : 'Apply points to get discount'}
+                    </p>
+                  </div>
+                </div>
+                {useLoyaltyPoints && (
+                  <span className="text-green-600 font-semibold">
+                    Save ₹{loyaltyDiscount.toFixed(2)}
+                  </span>
+                )}
+              </div>
             )}
           </div>
 
