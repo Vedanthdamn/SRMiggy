@@ -21,6 +21,7 @@ api.interceptors.request.use((config) => {
 export const authAPI = {
   login: (credentials) => api.post('/auth/login', credentials),
   register: (userData) => api.post('/auth/register', userData),
+  getLoyaltyPoints: () => api.get('/auth/loyalty-points'),
 };
 
 export const vendorAPI = {

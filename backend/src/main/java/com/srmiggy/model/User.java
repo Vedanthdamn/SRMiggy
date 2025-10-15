@@ -37,6 +37,9 @@ public class User {
     @Column(nullable = false)
     private Boolean enabled = true;
 
+    @Column(name = "loyalty_points")
+    private Double loyaltyPoints = 0.0;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

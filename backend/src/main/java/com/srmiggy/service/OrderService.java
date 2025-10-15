@@ -89,7 +89,35 @@ public class OrderService {
 
         order.setSubtotal(subtotal);
         order.setPlatformFee(PLATFORM_FEE);
-        order.setTotal(subtotal + PLATFORM_FEE);
+        
+        double total = subtotal + PLATFORM_FEE;
+        double pointsUsed = 0.0;
+        
+        // Handle loyalty points redemption
+        if (request.getUsePoints() != null && request.getUsePoints() && customer.getLoyaltyPoints() > 0) {
+            double availablePoints = customer.getLoyaltyPoints();
+            // 1 point = ₹1 discount
+            double maxDiscount = Math.min(availablePoints, total);
+            pointsUsed = maxDiscount;
+            total = total - maxDiscount;
+            
+            // Update customer's loyalty points
+            customer.setLoyaltyPoints(customer.getLoyaltyPoints() - pointsUsed);
+            userRepository.save(customer);
+            
+            order.setPointsUsed(pointsUsed);
+        }
+        
+        order.setTotal(total);
+        
+        // Calculate points earned: 0.5 points for every ₹100 spent
+        // Points are earned on subtotal (before fees and discounts)
+        double pointsEarned = (subtotal / 100.0) * 0.5;
+        order.setPointsEarned(pointsEarned);
+        
+        // Add earned points to customer's balance
+        customer.setLoyaltyPoints(customer.getLoyaltyPoints() + pointsEarned);
+        userRepository.save(customer);
 
         return orderRepository.save(order);
     }

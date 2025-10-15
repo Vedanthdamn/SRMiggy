@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { slotAPI, orderAPI, paymentAPI } from '../utils/api';
@@ -8,12 +8,16 @@ const Checkout = () => {
   const { cart, vendorId, getTotal, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const [slots, setSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState(user?.address || '');
   const [customerPhone, setCustomerPhone] = useState(user?.phone || '');
   const [loading, setLoading] = useState(false);
+  
+  // Get usePoints from navigation state
+  const usePoints = location.state?.usePoints || false;
 
   useEffect(() => {
     loadSlots();
@@ -47,6 +51,7 @@ const Checkout = () => {
           menuItemId: item.id,
           quantity: item.quantity,
         })),
+        usePoints: usePoints,
       };
 
       const orderResponse = await orderAPI.create(orderData);

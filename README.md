@@ -12,6 +12,7 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **Payment Integration**: Mock payment provider for testing
 - **Admin Dashboard**: View statistics, manage orders and vendors
 - **Mobile-First Design**: Responsive UI built with Tailwind CSS
+- **Campus Loyalty Program**: Earn points on every order and redeem them for discounts
 
 ## 📋 Tech Stack
 
@@ -124,11 +125,37 @@ The application comes with pre-seeded data for testing:
 - **Vendor Limitation**: Cart can only contain items from one vendor at a time
 - **Batch Delivery**: Orders grouped by vendor and slot for efficient delivery
 
+## 🏫 Campus Loyalty Program
+
+SRMiggy rewards students for every order with loyalty points that can be redeemed for discounts on future orders.
+
+### How It Works
+
+- **Earn Points**: Get 0.5 points for every ₹100 spent on orders (before fees)
+- **Redeem Points**: Use your accumulated points for instant discounts (1 point = ₹1 off)
+- **View Balance**: Check your available points and points you'll earn on the cart page
+- **Toggle Option**: Choose whether to use your points on each order with a simple toggle
+
+### Example
+
+If you order food worth ₹200:
+- You'll earn: **1 point** (₹200 ÷ 100 × 0.5)
+- If you have 50 points available, you can save up to ₹50 on your order
+- Points are automatically added to your account after successful payment
+
+### Where to Find It
+
+1. View your loyalty points balance in the **Cart** page
+2. See how many points you'll earn from your current order
+3. Toggle the "Use points for discount" option to apply your points
+4. Your discount is applied at checkout before payment
+
 ## 🔐 API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
+- `GET /api/auth/loyalty-points` - Get user's loyalty points balance
 
 ### Vendors
 - `GET /api/vendors` - Get all active vendors

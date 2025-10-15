@@ -47,6 +47,12 @@ public class Order {
     @Column(nullable = false)
     private Double total;
 
+    @Column(name = "points_earned")
+    private Double pointsEarned = 0.0;
+
+    @Column(name = "points_used")
+    private Double pointsUsed = 0.0;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status = OrderStatus.PENDING;

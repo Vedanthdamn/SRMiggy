@@ -58,7 +58,7 @@ public class AuthService {
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         String token = jwtUtil.generateToken(userDetails);
 
-        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole().name(), user.getId());
+        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole().name(), user.getId(), user.getLoyaltyPoints());
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -72,6 +72,6 @@ public class AuthService {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole().name(), user.getId());
+        return new AuthResponse(token, user.getUsername(), user.getEmail(), user.getRole().name(), user.getId(), user.getLoyaltyPoints());
     }
 }
