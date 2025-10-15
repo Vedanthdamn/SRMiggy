@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useState, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Welcome from './components/Welcome';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -34,68 +35,70 @@ function App() {
 
   return (
     <Router>
-      <AuthProvider>
-        <CartProvider>
-          {showWelcome && <Welcome onComplete={handleWelcomeComplete} />}
-          <div className="min-h-screen bg-gray-50" style={{ visibility: showWelcome ? 'hidden' : 'visible' }}>
-            <Navbar />
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/vendor/:id" element={<VendorMenu />} />
-              <Route
-                path="/cart"
-                element={
-                  <ProtectedRoute>
-                    <Cart />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/checkout"
-                element={
-                  <ProtectedRoute>
-                    <Checkout />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/order-success/:orderId"
-                element={
-                  <ProtectedRoute>
-                    <OrderSuccess />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/orders"
-                element={
-                  <ProtectedRoute>
-                    <Orders />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/wallet"
-                element={
-                  <ProtectedRoute>
-                    <Wallet />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </div>
-        </CartProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            {showWelcome && <Welcome onComplete={handleWelcomeComplete} />}
+            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300" style={{ visibility: showWelcome ? 'hidden' : 'visible' }}>
+              <Navbar />
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/vendor/:id" element={<VendorMenu />} />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoute>
+                      <Cart />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <Checkout />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/order-success/:orderId"
+                  element={
+                    <ProtectedRoute>
+                      <OrderSuccess />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/orders"
+                  element={
+                    <ProtectedRoute>
+                      <Orders />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/wallet"
+                  element={
+                    <ProtectedRoute>
+                      <Wallet />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute adminOnly>
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </div>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </Router>
   );
 }

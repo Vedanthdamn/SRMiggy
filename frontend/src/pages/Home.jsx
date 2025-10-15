@@ -23,20 +23,20 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl text-gray-600">Loading vendors...</div>
+      <div className="flex justify-center items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="text-xl text-gray-600 dark:text-gray-400">Loading vendors...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
             Welcome to SRMiggy
           </h1>
-          <p className="mt-2 text-xl text-gray-600">
+          <p className="mt-2 text-xl text-gray-600 dark:text-gray-400">
             Order food from Java Canteen vendors
           </p>
         </div>
@@ -46,7 +46,7 @@ const Home = () => {
             <Link
               key={vendor.id}
               to={`/vendor/${vendor.id}`}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
             >
               <img
                 src={vendor.imageUrl}
@@ -54,16 +54,16 @@ const Home = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                   {vendor.name}
                 </h2>
-                <p className="text-gray-600 mb-4">{vendor.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">{vendor.description}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <span className="text-yellow-500">★</span>
-                    <span className="ml-1 text-gray-700">{vendor.rating}</span>
+                    <span className="ml-1 text-gray-700 dark:text-gray-300">{vendor.rating}</span>
                   </div>
-                  <span className="text-primary font-semibold">View Menu →</span>
+                  <span className="text-primary dark:text-orange-400 font-semibold">View Menu →</span>
                 </div>
               </div>
             </Link>
