@@ -63,11 +63,13 @@ Validates configuration and tests connection:
 - ✅ API endpoints
 
 ### Manual Connection Test
-Test connection with Spring Boot validator:
+Test configuration directly with curl after starting:
 ```bash
-mvn spring-boot:run \
-  -Dspring-boot.run.profiles=supabase \
-  -Dspring-boot.run.mainClass=com.srmiggy.util.SupabaseConnectionValidator
+# Start with Supabase profile
+mvn spring-boot:run -Dspring-boot.run.profiles=supabase
+
+# In another terminal, test API
+curl http://localhost:8080/api/vendors
 ```
 
 ### Direct Database Test
