@@ -17,6 +17,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('mock');
   const [walletBalance, setWalletBalance] = useState(0);
+  const [isOrderingOpen, setIsOrderingOpen] = useState(true);
   const useLoyaltyPoints = location.state?.useLoyaltyPoints || false;
 
   useEffect(() => {
@@ -27,7 +28,8 @@ const Checkout = () => {
   const loadSlots = async () => {
     try {
       const response = await slotAPI.getActive();
-      setSlots(response.data);
+      setSlots(response.data.slots || []);
+      setIsOrderingOpen(response.data.isOrderingOpen);
     } catch (error) {
       console.error('Error loading slots:', error);
     }
@@ -154,21 +156,41 @@ const Checkout = () => {
             {/* Delivery Slot Selection */}
             <div>
               <h2 className="text-lg font-semibold mb-4">Select Delivery Slot</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {slots.map((slot) => (
-                  <button
-                    key={slot.id}
-                    onClick={() => setSelectedSlot(slot.id.toString())}
-                    className={`p-4 border-2 rounded-lg text-center ${
-                      selectedSlot === slot.id.toString()
-                        ? 'border-primary bg-primary bg-opacity-10'
-                        : 'border-gray-300 hover:border-primary'
-                    }`}
-                  >
-                    <div className="font-semibold">{slot.displayName}</div>
-                  </button>
-                ))}
-              </div>
+              {!isOrderingOpen ? (
+                <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6 text-center">
+                  <div className="text-red-600 text-lg font-semibold mb-2">
+                    ⏰ Ordering Closed for Today
+                  </div>
+                  <p className="text-gray-700">
+                    Please come back tomorrow between 11 AM and 7 PM to place your order.
+                  </p>
+                </div>
+              ) : slots.length === 0 ? (
+                <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 text-center">
+                  <div className="text-yellow-600 text-lg font-semibold mb-2">
+                    ⚠️ No Available Slots
+                  </div>
+                  <p className="text-gray-700">
+                    All delivery slots for today have passed. Please come back tomorrow between 11 AM and 7 PM.
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {slots.map((slot) => (
+                    <button
+                      key={slot.id}
+                      onClick={() => setSelectedSlot(slot.id.toString())}
+                      className={`p-4 border-2 rounded-lg text-center ${
+                        selectedSlot === slot.id.toString()
+                          ? 'border-primary bg-primary bg-opacity-10'
+                          : 'border-gray-300 hover:border-primary'
+                      }`}
+                    >
+                      <div className="font-semibold">{slot.displayName}</div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Payment Method Selection */}
@@ -266,10 +288,10 @@ const Checkout = () => {
 
             <button
               onClick={handlePlaceOrder}
-              disabled={loading || !selectedSlot || (paymentMethod === 'wallet' && walletBalance < total)}
+              disabled={loading || !selectedSlot || !isOrderingOpen || (paymentMethod === 'wallet' && walletBalance < total)}
               className="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Processing...' : `Place Order & Pay ₹${total.toFixed(2)}`}
+              {loading ? 'Processing...' : !isOrderingOpen ? 'Ordering Closed' : `Place Order & Pay ₹${total.toFixed(2)}`}
             </button>
           </div>
         </div>

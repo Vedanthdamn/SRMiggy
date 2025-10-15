@@ -42,10 +42,15 @@ public class DataInitializer implements CommandLineRunner {
         User vendor1User = createUser("vendor1", "vendor1@srmiggy.com", "password", "Raj Kumar", 
                 "9876543212", "Shop 1", UserRole.VENDOR);
 
-        // Create delivery slots
-        createDeliverySlot(LocalTime.of(19, 0), LocalTime.of(19, 30), "7:00 PM - 7:30 PM");
-        createDeliverySlot(LocalTime.of(19, 30), LocalTime.of(20, 0), "7:30 PM - 8:00 PM");
-        createDeliverySlot(LocalTime.of(20, 0), LocalTime.of(20, 30), "8:00 PM - 8:30 PM");
+        // Create delivery slots from 11:00 AM to 7:00 PM (hourly slots)
+        createDeliverySlot(LocalTime.of(11, 0), LocalTime.of(12, 0), "11:00 AM - 12:00 PM");
+        createDeliverySlot(LocalTime.of(12, 0), LocalTime.of(13, 0), "12:00 PM - 1:00 PM");
+        createDeliverySlot(LocalTime.of(13, 0), LocalTime.of(14, 0), "1:00 PM - 2:00 PM");
+        createDeliverySlot(LocalTime.of(14, 0), LocalTime.of(15, 0), "2:00 PM - 3:00 PM");
+        createDeliverySlot(LocalTime.of(15, 0), LocalTime.of(16, 0), "3:00 PM - 4:00 PM");
+        createDeliverySlot(LocalTime.of(16, 0), LocalTime.of(17, 0), "4:00 PM - 5:00 PM");
+        createDeliverySlot(LocalTime.of(17, 0), LocalTime.of(18, 0), "5:00 PM - 6:00 PM");
+        createDeliverySlot(LocalTime.of(18, 0), LocalTime.of(19, 0), "6:00 PM - 7:00 PM");
 
         // Create vendors with menus
         Vendor vendor1 = createVendor("Biryani House", "Authentic Hyderabadi Biryani", 
