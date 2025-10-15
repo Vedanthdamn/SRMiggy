@@ -55,7 +55,7 @@ public class DataInitializer implements CommandLineRunner {
             new String[]{"Mutton Biryani", "Tender mutton biryani", "220.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course", "false"},
             new String[]{"Veg Biryani", "Flavorful vegetable biryani", "150.0", "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?w=200", "Main Course", "true"},
             new String[]{"Raita", "Cucumber raita", "40.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
-            new String[]{"Gulab Jamun", "Sweet gulab jamun", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
+            new String[]{"Gulab Jamun", "Sweet gulab jamun", "50.0", "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=200", "Dessert", "true"},
             new String[]{"Chicken 65", "Spicy fried chicken", "160.0", "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=200", "Starter", "false"},
             new String[]{"Egg Biryani", "Boiled egg biryani", "120.0", "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200", "Main Course", "false"},
             new String[]{"Paneer Biryani", "Cottage cheese biryani", "140.0", "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?w=200", "Main Course", "true"},
@@ -63,7 +63,7 @@ public class DataInitializer implements CommandLineRunner {
             new String[]{"Chicken Kebab", "Grilled chicken kebabs", "140.0", "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=200", "Starter", "false"},
             new String[]{"Papad", "Crispy papad (2 pcs)", "20.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Sides", "true"},
             new String[]{"Mirchi Ka Salan", "Spicy chili curry", "80.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
-            new String[]{"Buttermilk", "Cool spiced buttermilk", "30.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Beverage", "true"},
+            new String[]{"Buttermilk", "Cool spiced buttermilk", "30.0", "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=200", "Beverage", "true"},
             new String[]{"Double Ka Meetha", "Bread pudding", "70.0", "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200", "Dessert", "true"},
             new String[]{"Onion Salad", "Fresh onion rings", "25.0", "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200", "Sides", "true"},
             new String[]{"Chicken Fry", "Andhra style chicken fry", "160.0", "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=200", "Starter", "false"}
@@ -72,21 +72,21 @@ public class DataInitializer implements CommandLineRunner {
         Vendor vendor2 = createVendor("Dosa Corner", "South Indian Delicacies", 
                 "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400", null);
         createMenuItems(vendor2, Arrays.asList(
-            new String[]{"Masala Dosa", "Crispy masala dosa", "100.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Main Course", "true"},
+            new String[]{"Masala Dosa", "Crispy masala dosa", "100.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Main Course", "true"},
             new String[]{"Plain Dosa", "Simple plain dosa", "80.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
             new String[]{"Idli Sambar", "Soft idlis with sambar", "70.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Main Course", "true"},
             new String[]{"Vada Sambar", "Crispy vadas", "80.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course", "true"},
             new String[]{"Filter Coffee", "Traditional filter coffee", "30.0", "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200", "Beverage", "true"},
             new String[]{"Uttapam", "Thick uttapam", "90.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course", "true"},
             new String[]{"Onion Dosa", "Dosa with onion topping", "85.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
-            new String[]{"Rava Dosa", "Semolina crispy dosa", "90.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Main Course", "true"},
+            new String[]{"Rava Dosa", "Semolina crispy dosa", "90.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
             new String[]{"Pongal", "Rice and lentil dish", "75.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Main Course", "true"},
             new String[]{"Upma", "Semolina breakfast dish", "60.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course", "true"},
             new String[]{"Medu Vada", "Fried lentil donuts (3 pcs)", "70.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Starter", "true"},
-            new String[]{"Coconut Chutney", "Fresh coconut chutney", "20.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Sides", "true"},
+            new String[]{"Coconut Chutney", "Fresh coconut chutney", "20.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Sides", "true"},
             new String[]{"Sambar (Bowl)", "Lentil vegetable stew", "40.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Sides", "true"},
             new String[]{"Mysore Masala Dosa", "Spicy red chutney dosa", "95.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
-            new String[]{"Ghee Dosa", "Dosa with clarified butter", "90.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Main Course", "true"},
+            new String[]{"Ghee Dosa", "Dosa with clarified butter", "90.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
             new String[]{"Tea", "South Indian masala tea", "25.0", "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200", "Beverage", "true"}
         ));
 
@@ -139,18 +139,18 @@ public class DataInitializer implements CommandLineRunner {
             new String[]{"Non-Veg Thali", "Complete non-veg meal", "180.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "false"},
             new String[]{"Paneer Butter Masala", "Creamy paneer curry", "160.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course", "true"},
             new String[]{"Dal Makhani", "Black lentil curry", "120.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
-            new String[]{"Roti (5 pcs)", "Wheat flatbread", "30.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
-            new String[]{"Lassi", "Sweet yogurt drink", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Beverage", "true"},
+            new String[]{"Roti (5 pcs)", "Wheat flatbread", "30.0", "https://images.unsplash.com/photo-1626776876729-bab4cbaebdaf?w=200", "Sides", "true"},
+            new String[]{"Lassi", "Sweet yogurt drink", "50.0", "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=200", "Beverage", "true"},
             new String[]{"Dal Tadka", "Yellow lentil curry", "100.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
             new String[]{"Aloo Gobi", "Potato cauliflower curry", "110.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
             new String[]{"Chole Bhature", "Chickpea curry with fried bread", "100.0", "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=200", "Main Course", "true"},
             new String[]{"Palak Paneer", "Spinach cottage cheese curry", "140.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course", "true"},
             new String[]{"Jeera Rice", "Cumin flavored rice", "80.0", "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=200", "Sides", "true"},
-            new String[]{"Naan (2 pcs)", "Leavened flatbread", "40.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
+            new String[]{"Naan (2 pcs)", "Leavened flatbread", "40.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Sides", "true"},
             new String[]{"Mixed Veg Curry", "Assorted vegetable curry", "120.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
-            new String[]{"Mango Lassi", "Mango yogurt drink", "60.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Beverage", "true"},
+            new String[]{"Mango Lassi", "Mango yogurt drink", "60.0", "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=200", "Beverage", "true"},
             new String[]{"Papad Roasted", "Roasted papad (2 pcs)", "25.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Sides", "true"},
-            new String[]{"Pickle", "Mixed Indian pickle", "15.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Sides", "true"}
+            new String[]{"Pickle", "Mixed Indian pickle", "15.0", "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=200", "Sides", "true"}
         ));
 
         Vendor vendor6 = createVendor("Roll Junction", "Delicious Rolls & Wraps", 
@@ -160,8 +160,8 @@ public class DataInitializer implements CommandLineRunner {
             new String[]{"Chicken Tikka Roll", "Tandoori chicken wrap", "120.0", "https://images.unsplash.com/photo-1593504049359-74330189a345?w=200", "Main Course", "false"},
             new String[]{"Egg Roll", "Classic egg roll", "80.0", "https://images.unsplash.com/photo-1612240498434-0b7b9073e07e?w=200", "Main Course", "false"},
             new String[]{"Veg Manchurian Roll", "Indo-Chinese veggie roll", "85.0", "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200", "Main Course", "true"},
-            new String[]{"Mutton Seekh Roll", "Spiced mutton seekh wrap", "140.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Main Course", "false"},
-            new String[]{"Aloo Tikki Roll", "Potato patty wrap", "70.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Main Course", "true"},
+            new String[]{"Mutton Seekh Roll", "Spiced mutton seekh wrap", "140.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "false"},
+            new String[]{"Aloo Tikki Roll", "Potato patty wrap", "70.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "true"},
             new String[]{"Schezwan Paneer Roll", "Spicy paneer roll", "95.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "true"},
             new String[]{"Chicken Seekh Roll", "Minced chicken roll", "110.0", "https://images.unsplash.com/photo-1593504049359-74330189a345?w=200", "Main Course", "false"},
             new String[]{"Falafel Roll", "Middle eastern chickpea roll", "85.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "true"},
@@ -171,7 +171,7 @@ public class DataInitializer implements CommandLineRunner {
             new String[]{"Spring Roll (3 pcs)", "Crispy vegetable rolls", "70.0", "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200", "Starter", "true"},
             new String[]{"Chicken Malai Roll", "Creamy chicken roll", "125.0", "https://images.unsplash.com/photo-1593504049359-74330189a345?w=200", "Main Course", "false"},
             new String[]{"Veg Frankie", "Mumbai style veggie wrap", "75.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "true"},
-            new String[]{"Mint Chutney", "Fresh mint sauce", "20.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Sides", "true"}
+            new String[]{"Mint Chutney", "Fresh mint sauce", "20.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Sides", "true"}
         ));
 
         Vendor vendor7 = createVendor("Ice Cream Parlor", "Premium Ice Creams", 
@@ -200,20 +200,20 @@ public class DataInitializer implements CommandLineRunner {
         createMenuItems(vendor8, Arrays.asList(
             new String[]{"Brownie", "Chocolate fudge brownie", "80.0", "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=200", "Dessert", "true"},
             new String[]{"Cheesecake", "New York style cheesecake", "150.0", "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=200", "Dessert", "true"},
-            new String[]{"Rasmalai", "Traditional Indian sweet", "90.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
-            new String[]{"Gajar Halwa", "Carrot pudding", "70.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Dessert", "true"},
+            new String[]{"Rasmalai", "Traditional Indian sweet", "90.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Dessert", "true"},
+            new String[]{"Gajar Halwa", "Carrot pudding", "70.0", "https://images.unsplash.com/photo-1644888937245-cc97b5994d9e?w=200", "Dessert", "true"},
             new String[]{"Chocolate Mousse", "Light chocolate mousse", "110.0", "https://images.unsplash.com/photo-1541599540903-216a46934c0b?w=200", "Dessert", "true"},
             new String[]{"Fruit Custard", "Mixed fruit custard", "80.0", "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200", "Dessert", "true"},
-            new String[]{"Jalebi", "Crispy sweet spirals", "60.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
-            new String[]{"Ras Gulla", "Soft cheese balls in syrup (4 pcs)", "70.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
+            new String[]{"Jalebi", "Crispy sweet spirals", "60.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Dessert", "true"},
+            new String[]{"Ras Gulla", "Soft cheese balls in syrup (4 pcs)", "70.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Dessert", "true"},
             new String[]{"Kheer", "Rice pudding", "65.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Dessert", "true"},
             new String[]{"Chocolate Pastry", "Rich chocolate pastry", "90.0", "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200", "Dessert", "true"},
             new String[]{"Black Forest Pastry", "Classic black forest", "100.0", "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=200", "Dessert", "true"},
             new String[]{"Vanilla Pastry", "Light vanilla sponge", "85.0", "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=200", "Dessert", "true"},
             new String[]{"Mango Pastry", "Tropical mango pastry", "95.0", "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=200", "Dessert", "true"},
-            new String[]{"Gulab Jamun (4 pcs)", "Sweet milk dumplings", "60.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
-            new String[]{"Kalakand", "Milk cake", "75.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
-            new String[]{"Peda (6 pcs)", "Traditional milk sweet", "70.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"}
+            new String[]{"Gulab Jamun (4 pcs)", "Sweet milk dumplings", "60.0", "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=200", "Dessert", "true"},
+            new String[]{"Kalakand", "Milk cake", "75.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Dessert", "true"},
+            new String[]{"Peda (6 pcs)", "Traditional milk sweet", "70.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Dessert", "true"}
         ));
 
         // Create settings
