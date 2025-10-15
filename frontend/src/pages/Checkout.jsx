@@ -79,8 +79,10 @@ const Checkout = () => {
   };
 
   const PLATFORM_FEE = 2;
+  const DELIVERY_FEE = 10;
   const subtotal = getTotal();
-  const total = subtotal + PLATFORM_FEE;
+  const deliveryFee = subtotal < 100 ? DELIVERY_FEE : 0;
+  const total = subtotal + deliveryFee + PLATFORM_FEE;
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -157,6 +159,12 @@ const Checkout = () => {
                     <span>Subtotal</span>
                     <span>₹{subtotal.toFixed(2)}</span>
                   </div>
+                  {subtotal < 100 && (
+                    <div className="flex justify-between text-gray-700">
+                      <span>Delivery Fee (orders below ₹100)</span>
+                      <span>₹{deliveryFee.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-gray-700">
                     <span>Platform Fee</span>
                     <span>₹{PLATFORM_FEE.toFixed(2)}</span>
