@@ -42,10 +42,27 @@ public class DataInitializer implements CommandLineRunner {
         User vendor1User = createUser("vendor1", "vendor1@srmiggy.com", "password", "Raj Kumar", 
                 "9876543212", "Shop 1", UserRole.VENDOR);
 
-        // Create delivery slots
+        // Create delivery slots (11:00 AM to 9:00 PM)
+        createDeliverySlot(LocalTime.of(11, 0), LocalTime.of(11, 30), "11:00 AM - 11:30 AM");
+        createDeliverySlot(LocalTime.of(11, 30), LocalTime.of(12, 0), "11:30 AM - 12:00 PM");
+        createDeliverySlot(LocalTime.of(12, 0), LocalTime.of(12, 30), "12:00 PM - 12:30 PM");
+        createDeliverySlot(LocalTime.of(12, 30), LocalTime.of(13, 0), "12:30 PM - 1:00 PM");
+        createDeliverySlot(LocalTime.of(13, 0), LocalTime.of(13, 30), "1:00 PM - 1:30 PM");
+        createDeliverySlot(LocalTime.of(13, 30), LocalTime.of(14, 0), "1:30 PM - 2:00 PM");
+        createDeliverySlot(LocalTime.of(14, 0), LocalTime.of(14, 30), "2:00 PM - 2:30 PM");
+        createDeliverySlot(LocalTime.of(14, 30), LocalTime.of(15, 0), "2:30 PM - 3:00 PM");
+        createDeliverySlot(LocalTime.of(15, 0), LocalTime.of(15, 30), "3:00 PM - 3:30 PM");
+        createDeliverySlot(LocalTime.of(15, 30), LocalTime.of(16, 0), "3:30 PM - 4:00 PM");
+        createDeliverySlot(LocalTime.of(16, 0), LocalTime.of(16, 30), "4:00 PM - 4:30 PM");
+        createDeliverySlot(LocalTime.of(16, 30), LocalTime.of(17, 0), "4:30 PM - 5:00 PM");
+        createDeliverySlot(LocalTime.of(17, 0), LocalTime.of(17, 30), "5:00 PM - 5:30 PM");
+        createDeliverySlot(LocalTime.of(17, 30), LocalTime.of(18, 0), "5:30 PM - 6:00 PM");
+        createDeliverySlot(LocalTime.of(18, 0), LocalTime.of(18, 30), "6:00 PM - 6:30 PM");
+        createDeliverySlot(LocalTime.of(18, 30), LocalTime.of(19, 0), "6:30 PM - 7:00 PM");
         createDeliverySlot(LocalTime.of(19, 0), LocalTime.of(19, 30), "7:00 PM - 7:30 PM");
         createDeliverySlot(LocalTime.of(19, 30), LocalTime.of(20, 0), "7:30 PM - 8:00 PM");
         createDeliverySlot(LocalTime.of(20, 0), LocalTime.of(20, 30), "8:00 PM - 8:30 PM");
+        createDeliverySlot(LocalTime.of(20, 30), LocalTime.of(21, 0), "8:30 PM - 9:00 PM");
 
         // Create vendors with menus
         Vendor vendor1 = createVendor("Biryani House", "Authentic Hyderabadi Biryani", 
