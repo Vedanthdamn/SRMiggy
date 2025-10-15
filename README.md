@@ -102,7 +102,7 @@ The application comes with pre-seeded data for testing:
   - Roll Junction (Rolls & Wraps)
   - Ice Cream Parlor (Ice Creams)
   - Dessert House (Desserts)
-- **50+ Menu Items**: With proper veg/non-veg classification
+- **128 Menu Items**: 16 items per vendor with proper veg/non-veg classification and affordable options under ₹100
 - **3 Delivery Slots**: Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
 
