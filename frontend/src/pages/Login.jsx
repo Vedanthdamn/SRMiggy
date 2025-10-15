@@ -20,7 +20,7 @@ const Login = () => {
       const { token, username, email, role, userId } = response.data;
       login({ username, email, role, userId }, token);
       navigate('/');
-    } catch (err) {
+    } catch {
       setError('Invalid username or password');
     } finally {
       setLoading(false);

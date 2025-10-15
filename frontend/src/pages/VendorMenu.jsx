@@ -11,23 +11,23 @@ const VendorMenu = () => {
   const { addToCart } = useCart();
 
   useEffect(() => {
+    const loadVendorAndMenu = async () => {
+      try {
+        const [vendorRes, menuRes] = await Promise.all([
+          vendorAPI.getById(id),
+          menuAPI.getByVendor(id),
+        ]);
+        setVendor(vendorRes.data);
+        setMenuItems(menuRes.data);
+      } catch (error) {
+        console.error('Error loading vendor menu:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     loadVendorAndMenu();
   }, [id]);
-
-  const loadVendorAndMenu = async () => {
-    try {
-      const [vendorRes, menuRes] = await Promise.all([
-        vendorAPI.getById(id),
-        menuAPI.getByVendor(id),
-      ]);
-      setVendor(vendorRes.data);
-      setMenuItems(menuRes.data);
-    } catch (error) {
-      console.error('Error loading vendor menu:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleAddToCart = (menuItem) => {
     const success = addToCart(menuItem, vendor);
