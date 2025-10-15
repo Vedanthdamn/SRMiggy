@@ -47,6 +47,7 @@ export const paymentAPI = {
   createOrder: (orderId) => api.post(`/payments/create-order?orderId=${orderId}`),
   verify: (paymentData) => api.post('/payments/verify', paymentData),
   getByOrderId: (orderId) => api.get(`/payments/order/${orderId}`),
+  payWithWallet: (orderId) => api.post(`/payments/pay-with-wallet?orderId=${orderId}`),
 };
 
 export const adminAPI = {
@@ -55,6 +56,12 @@ export const adminAPI = {
   getAllUsers: () => api.get('/admin/users'),
   getStats: () => api.get('/admin/stats'),
   updateOrderStatus: (id, status) => api.put(`/admin/orders/${id}/status?status=${status}`),
+};
+
+export const walletAPI = {
+  addMoney: (amount) => api.post('/wallet/add-money', { amount }),
+  getBalance: () => api.get('/wallet/balance'),
+  getTransactions: () => api.get('/wallet/transactions'),
 };
 
 export default api;

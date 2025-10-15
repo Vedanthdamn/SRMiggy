@@ -8,37 +8,30 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "wallet_transactions")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class WalletTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(unique = true, nullable = false)
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
-    private String password;
-
-    private String fullName;
-    private String phone;
-    private String address;
+    private Double amount;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRole role;
+    private WalletTransactionType type;
 
-    @Column(nullable = false)
-    private Boolean enabled = true;
+    private String description;
 
-    @Column(nullable = false)
-    private Double walletBalance = 0.0;
+    @Column(name = "balance_after")
+    private Double balanceAfter;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

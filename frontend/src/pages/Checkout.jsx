@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { slotAPI, orderAPI, paymentAPI } from '../utils/api';
+import { slotAPI, orderAPI, paymentAPI, walletAPI } from '../utils/api';
 
 const Checkout = () => {
   const { cart, vendorId, getTotal, clearCart } = useCart();
@@ -14,9 +14,12 @@ const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState(user?.address || '');
   const [customerPhone, setCustomerPhone] = useState(user?.phone || '');
   const [loading, setLoading] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('mock');
+  const [walletBalance, setWalletBalance] = useState(0);
 
   useEffect(() => {
     loadSlots();
+    loadWalletBalance();
   }, []);
 
   const loadSlots = async () => {
@@ -28,9 +31,27 @@ const Checkout = () => {
     }
   };
 
+  const loadWalletBalance = async () => {
+    try {
+      const response = await walletAPI.getBalance();
+      setWalletBalance(response.data);
+    } catch (error) {
+      console.error('Error loading wallet balance:', error);
+    }
+  };
+
   const handlePlaceOrder = async () => {
     if (!selectedSlot) {
       alert('Please select a delivery slot');
+      return;
+    }
+
+    const PLATFORM_FEE = 2;
+    const subtotal = getTotal();
+    const total = subtotal + PLATFORM_FEE;
+
+    if (paymentMethod === 'wallet' && walletBalance < total) {
+      alert('Insufficient wallet balance. Please add money to your wallet or use another payment method.');
       return;
     }
 
@@ -52,20 +73,25 @@ const Checkout = () => {
       const orderResponse = await orderAPI.create(orderData);
       const orderId = orderResponse.data.id;
 
-      // Create payment order
-      const paymentResponse = await paymentAPI.createOrder(orderId);
-      const { providerOrderId } = paymentResponse.data;
+      if (paymentMethod === 'wallet') {
+        // Pay with wallet
+        await paymentAPI.payWithWallet(orderId);
+      } else {
+        // Create payment order
+        const paymentResponse = await paymentAPI.createOrder(orderId);
+        const { providerOrderId } = paymentResponse.data;
 
-      // Simulate payment (in real scenario, this would redirect to payment gateway)
-      const mockPaymentId = 'MOCK_PAY_' + Math.random().toString(36).substr(2, 9);
-      const mockSignature = 'MOCK_SIG_' + Math.random().toString(36).substr(2, 9);
+        // Simulate payment (in real scenario, this would redirect to payment gateway)
+        const mockPaymentId = 'MOCK_PAY_' + Math.random().toString(36).substr(2, 9);
+        const mockSignature = 'MOCK_SIG_' + Math.random().toString(36).substr(2, 9);
 
-      // Verify payment
-      await paymentAPI.verify({
-        providerOrderId,
-        providerPaymentId: mockPaymentId,
-        providerSignature: mockSignature,
-      });
+        // Verify payment
+        await paymentAPI.verify({
+          providerOrderId,
+          providerPaymentId: mockPaymentId,
+          providerSignature: mockSignature,
+        });
+      }
 
       // Clear cart and navigate to success page
       clearCart();
@@ -140,6 +166,64 @@ const Checkout = () => {
               </div>
             </div>
 
+            {/* Payment Method Selection */}
+            <div>
+              <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
+              <div className="space-y-3">
+                <div
+                  onClick={() => setPaymentMethod('wallet')}
+                  className={`p-4 border-2 rounded-lg cursor-pointer ${
+                    paymentMethod === 'wallet'
+                      ? 'border-primary bg-primary bg-opacity-10'
+                      : 'border-gray-300 hover:border-primary'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <span className="text-2xl mr-3">💰</span>
+                      <div>
+                        <div className="font-semibold">Wallet</div>
+                        <div className="text-sm text-gray-600">
+                          Available Balance: ₹{walletBalance.toFixed(2)}
+                        </div>
+                      </div>
+                    </div>
+                    {paymentMethod === 'wallet' && (
+                      <span className="text-primary">✓</span>
+                    )}
+                  </div>
+                  {paymentMethod === 'wallet' && walletBalance < total && (
+                    <div className="mt-2 text-sm text-red-600">
+                      Insufficient balance. Please add ₹{(total - walletBalance).toFixed(2)} more.
+                    </div>
+                  )}
+                </div>
+                <div
+                  onClick={() => setPaymentMethod('mock')}
+                  className={`p-4 border-2 rounded-lg cursor-pointer ${
+                    paymentMethod === 'mock'
+                      ? 'border-primary bg-primary bg-opacity-10'
+                      : 'border-gray-300 hover:border-primary'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <span className="text-2xl mr-3">💳</span>
+                      <div>
+                        <div className="font-semibold">Other Payment Methods</div>
+                        <div className="text-sm text-gray-600">
+                          Credit/Debit Card, UPI, Net Banking
+                        </div>
+                      </div>
+                    </div>
+                    {paymentMethod === 'mock' && (
+                      <span className="text-primary">✓</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Order Summary */}
             <div>
               <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
@@ -171,10 +255,10 @@ const Checkout = () => {
 
             <button
               onClick={handlePlaceOrder}
-              disabled={loading || !selectedSlot}
+              disabled={loading || !selectedSlot || (paymentMethod === 'wallet' && walletBalance < total)}
               className="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Processing...' : 'Place Order & Pay'}
+              {loading ? 'Processing...' : `Place Order & Pay ₹${total.toFixed(2)}`}
             </button>
           </div>
         </div>

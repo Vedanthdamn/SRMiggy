@@ -14,6 +14,7 @@ import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
+import Wallet from './pages/Wallet';
 
 function App() {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -72,6 +73,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Orders />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/wallet"
+                element={
+                  <ProtectedRoute>
+                    <Wallet />
                   </ProtectedRoute>
                 }
               />

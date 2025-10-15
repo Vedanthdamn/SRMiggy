@@ -23,6 +23,9 @@ public class PaymentService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private WalletService walletService;
+
     @Transactional
     public PaymentOrderResponse createPaymentOrder(Long orderId) {
         Order order = orderRepository.findById(orderId)
@@ -77,5 +80,33 @@ public class PaymentService {
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         return paymentTransactionRepository.findByOrder(order)
                 .orElse(null);
+    }
+
+    @Transactional
+    public PaymentTransaction payWithWallet(Long orderId, String username) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if (order.getStatus() != OrderStatus.PENDING) {
+            throw new RuntimeException("Order is not in pending state");
+        }
+
+        // Deduct money from wallet
+        walletService.deductMoney(username, order.getTotal(), "Payment for Order #" + orderId);
+
+        // Create payment transaction
+        PaymentTransaction transaction = new PaymentTransaction();
+        transaction.setOrder(order);
+        transaction.setAmount(order.getTotal());
+        transaction.setStatus(PaymentStatus.SUCCESS);
+        transaction.setProvider("WALLET");
+        transaction.setProviderOrderId("WALLET_" + UUID.randomUUID().toString());
+        transaction.setProviderPaymentId("WALLET_PAY_" + orderId);
+
+        // Update order status
+        order.setStatus(OrderStatus.CONFIRMED);
+        orderRepository.save(order);
+
+        return paymentTransactionRepository.save(transaction);
     }
 }
