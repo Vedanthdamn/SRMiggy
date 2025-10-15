@@ -30,7 +30,7 @@ public class PaymentService {
     private LoyaltyService loyaltyService;
 
     @Transactional
-    public PaymentOrderResponse createPaymentOrder(Long orderId) {
+    public PaymentOrderResponse createPaymentOrder(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 
@@ -55,7 +55,7 @@ public class PaymentService {
             providerOrderId,
             order.getTotal(),
             "MOCK",
-            order.getId()
+            order.getId().toString()
         );
     }
 
@@ -86,7 +86,7 @@ public class PaymentService {
         return paymentTransactionRepository.save(transaction);
     }
 
-    public PaymentTransaction getPaymentByOrderId(Long orderId) {
+    public PaymentTransaction getPaymentByOrderId(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         return paymentTransactionRepository.findByOrder(order)
@@ -94,7 +94,7 @@ public class PaymentService {
     }
 
     @Transactional
-    public PaymentTransaction payWithWallet(Long orderId, String username) {
+    public PaymentTransaction payWithWallet(UUID orderId, String username) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
 

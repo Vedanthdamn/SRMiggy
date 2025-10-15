@@ -46,7 +46,8 @@ SRMiggy rewards students for every order with our Campus Loyalty Program!
 - Spring Boot 3.2.0
 - Spring Security (JWT)
 - Spring Data JPA
-- H2 Database (development)
+- H2 Database (development) / **PostgreSQL via Supabase (production)**
+- HikariCP Connection Pooling
 - Maven
 
 ### Frontend
@@ -379,18 +380,42 @@ cat dist/assets/index-*.css | head -5
 
 ### Development Setup
 - This is a development setup with H2 in-memory database
+- **For Production**: Use Supabase PostgreSQL (see setup guides below)
 - Tailwind CSS is configured with PostCSS and works in both dev and production builds
 - Frontend uses Vite for fast development and optimized production builds
 
-### Production Deployment
-- For production, configure PostgreSQL or MySQL in `application.properties`
+### Production Deployment with Supabase
+- ✅ **Supabase PostgreSQL Integration Available**
+- ✅ See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) for complete setup guide
+- ✅ See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for migrating from H2 to Supabase
+- ✅ See [EXAMPLE_SERVICE_CODE.md](EXAMPLE_SERVICE_CODE.md) for code examples
 - Replace mock payment with actual provider (Razorpay/Stripe)
 - Update JWT secret key for production use
 - Add proper error handling and validation
 - Ensure Tailwind CSS is properly compiled in production build (automatically handled by Vite)
 - Use environment variables for sensitive configuration
 - Enable HTTPS for both frontend and backend
-- Set up proper database backups and monitoring
+- Set up proper database backups (automatic with Supabase)
+
+### Supabase Integration Features
+- ✅ UUID primary keys for better security and scalability
+- ✅ Row Level Security (RLS) for data isolation
+- ✅ HikariCP connection pooling for performance
+- ✅ Automatic timestamp tracking with database triggers
+- ✅ Professional PostgreSQL schema with indexes
+- ✅ Production-grade database with automatic backups
+
+### Quick Start with Supabase
+```bash
+# 1. Create Supabase project at https://supabase.com
+# 2. Run schema SQL in Supabase SQL Editor (backend/src/main/resources/supabase-schema.sql)
+# 3. Run seed data SQL (backend/src/main/resources/supabase-seed-data.sql)
+# 4. Update connection details in backend/src/main/resources/application-supabase.properties
+# 5. Run backend with Supabase profile
+mvn spring-boot:run -Dspring-boot.run.profiles=supabase
+```
+
+See detailed guides for complete instructions.
 
 ## 👥 Contributors
 

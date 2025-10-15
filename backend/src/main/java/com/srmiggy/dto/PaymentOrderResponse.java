@@ -11,5 +11,5 @@ public class PaymentOrderResponse {
     private String providerOrderId;
     private Double amount;
     private String provider;
-    private Long orderId;
+    private String orderId;
 }
