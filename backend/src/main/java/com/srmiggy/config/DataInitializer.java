@@ -51,56 +51,90 @@ public class DataInitializer implements CommandLineRunner {
         Vendor vendor1 = createVendor("Biryani House", "Authentic Hyderabadi Biryani", 
                 "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400", vendor1User);
         createMenuItems(vendor1, Arrays.asList(
-            new String[]{"Chicken Biryani", "Delicious chicken biryani", "180.0", "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200", "Main Course"},
-            new String[]{"Mutton Biryani", "Tender mutton biryani", "220.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course"},
-            new String[]{"Veg Biryani", "Flavorful vegetable biryani", "150.0", "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?w=200", "Main Course"},
-            new String[]{"Raita", "Cucumber raita", "40.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides"},
-            new String[]{"Gulab Jamun", "Sweet gulab jamun", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert"},
-            new String[]{"Chicken 65", "Spicy fried chicken", "160.0", "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=200", "Starter"}
+            new String[]{"Chicken Biryani", "Delicious chicken biryani", "180.0", "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200", "Main Course", "false"},
+            new String[]{"Mutton Biryani", "Tender mutton biryani", "220.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course", "false"},
+            new String[]{"Veg Biryani", "Flavorful vegetable biryani", "150.0", "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?w=200", "Main Course", "true"},
+            new String[]{"Raita", "Cucumber raita", "40.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
+            new String[]{"Gulab Jamun", "Sweet gulab jamun", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
+            new String[]{"Chicken 65", "Spicy fried chicken", "160.0", "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=200", "Starter", "false"}
         ));
 
         Vendor vendor2 = createVendor("Dosa Corner", "South Indian Delicacies", 
                 "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400", null);
         createMenuItems(vendor2, Arrays.asList(
-            new String[]{"Masala Dosa", "Crispy masala dosa", "100.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Main Course"},
-            new String[]{"Plain Dosa", "Simple plain dosa", "80.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course"},
-            new String[]{"Idli Sambar", "Soft idlis with sambar", "70.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Main Course"},
-            new String[]{"Vada Sambar", "Crispy vadas", "80.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course"},
-            new String[]{"Filter Coffee", "Traditional filter coffee", "30.0", "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200", "Beverage"},
-            new String[]{"Uttapam", "Thick uttapam", "90.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course"}
+            new String[]{"Masala Dosa", "Crispy masala dosa", "100.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Main Course", "true"},
+            new String[]{"Plain Dosa", "Simple plain dosa", "80.0", "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=200", "Main Course", "true"},
+            new String[]{"Idli Sambar", "Soft idlis with sambar", "70.0", "https://images.unsplash.com/photo-1630383249896-424e482df921?w=200", "Main Course", "true"},
+            new String[]{"Vada Sambar", "Crispy vadas", "80.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course", "true"},
+            new String[]{"Filter Coffee", "Traditional filter coffee", "30.0", "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=200", "Beverage", "true"},
+            new String[]{"Uttapam", "Thick uttapam", "90.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Main Course", "true"}
         ));
 
         Vendor vendor3 = createVendor("Burger Junction", "American Fast Food", 
                 "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400", null);
         createMenuItems(vendor3, Arrays.asList(
-            new String[]{"Classic Burger", "Juicy beef burger", "120.0", "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200", "Main Course"},
-            new String[]{"Cheese Burger", "Burger with extra cheese", "140.0", "https://images.unsplash.com/photo-1550547660-d9450f859349?w=200", "Main Course"},
-            new String[]{"Chicken Burger", "Grilled chicken burger", "130.0", "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=200", "Main Course"},
-            new String[]{"French Fries", "Crispy fries", "60.0", "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=200", "Sides"},
-            new String[]{"Coke", "Chilled coke", "40.0", "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=200", "Beverage"},
-            new String[]{"Chicken Wings", "Spicy wings", "150.0", "https://images.unsplash.com/photo-1608039755401-742074f0548d?w=200", "Starter"}
+            new String[]{"Classic Burger", "Juicy beef burger", "120.0", "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200", "Main Course", "false"},
+            new String[]{"Cheese Burger", "Burger with extra cheese", "140.0", "https://images.unsplash.com/photo-1550547660-d9450f859349?w=200", "Main Course", "false"},
+            new String[]{"Chicken Burger", "Grilled chicken burger", "130.0", "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=200", "Main Course", "false"},
+            new String[]{"Veg Burger", "Delicious veggie patty burger", "110.0", "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=200", "Main Course", "true"},
+            new String[]{"French Fries", "Crispy fries", "60.0", "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=200", "Sides", "true"},
+            new String[]{"Coke", "Chilled coke", "40.0", "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=200", "Beverage", "true"},
+            new String[]{"Chicken Wings", "Spicy wings", "150.0", "https://images.unsplash.com/photo-1608039755401-742074f0548d?w=200", "Starter", "false"}
         ));
 
         Vendor vendor4 = createVendor("Pizza Paradise", "Italian Pizzas", 
                 "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400", null);
         createMenuItems(vendor4, Arrays.asList(
-            new String[]{"Margherita Pizza", "Classic margherita", "200.0", "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=200", "Main Course"},
-            new String[]{"Pepperoni Pizza", "Loaded pepperoni", "250.0", "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=200", "Main Course"},
-            new String[]{"Veggie Pizza", "Fresh vegetable pizza", "220.0", "https://images.unsplash.com/photo-1511689660979-10d2b1aada49?w=200", "Main Course"},
-            new String[]{"Garlic Bread", "Cheesy garlic bread", "80.0", "https://images.unsplash.com/photo-1573140401552-3fab0b24306f?w=200", "Sides"},
-            new String[]{"Pasta Alfredo", "Creamy pasta", "180.0", "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=200", "Main Course"},
-            new String[]{"Tiramisu", "Italian dessert", "100.0", "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200", "Dessert"}
+            new String[]{"Margherita Pizza", "Classic margherita", "200.0", "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=200", "Main Course", "true"},
+            new String[]{"Pepperoni Pizza", "Loaded pepperoni", "250.0", "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=200", "Main Course", "false"},
+            new String[]{"Veggie Pizza", "Fresh vegetable pizza", "220.0", "https://images.unsplash.com/photo-1511689660979-10d2b1aada49?w=200", "Main Course", "true"},
+            new String[]{"Garlic Bread", "Cheesy garlic bread", "80.0", "https://images.unsplash.com/photo-1573140401552-3fab0b24306f?w=200", "Sides", "true"},
+            new String[]{"Pasta Alfredo", "Creamy pasta", "180.0", "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=200", "Main Course", "true"},
+            new String[]{"Tiramisu", "Italian dessert", "100.0", "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200", "Dessert", "true"}
         ));
 
         Vendor vendor5 = createVendor("Thali Express", "North Indian Thali", 
                 "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400", null);
         createMenuItems(vendor5, Arrays.asList(
-            new String[]{"Veg Thali", "Complete veg meal", "150.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course"},
-            new String[]{"Non-Veg Thali", "Complete non-veg meal", "180.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course"},
-            new String[]{"Paneer Butter Masala", "Creamy paneer curry", "160.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course"},
-            new String[]{"Dal Makhani", "Black lentil curry", "120.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course"},
-            new String[]{"Roti (5 pcs)", "Wheat flatbread", "30.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides"},
-            new String[]{"Lassi", "Sweet yogurt drink", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Beverage"}
+            new String[]{"Veg Thali", "Complete veg meal", "150.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
+            new String[]{"Non-Veg Thali", "Complete non-veg meal", "180.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "false"},
+            new String[]{"Paneer Butter Masala", "Creamy paneer curry", "160.0", "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200", "Main Course", "true"},
+            new String[]{"Dal Makhani", "Black lentil curry", "120.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Main Course", "true"},
+            new String[]{"Roti (5 pcs)", "Wheat flatbread", "30.0", "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=200", "Sides", "true"},
+            new String[]{"Lassi", "Sweet yogurt drink", "50.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Beverage", "true"}
+        ));
+
+        Vendor vendor6 = createVendor("Roll Junction", "Delicious Rolls & Wraps", 
+                "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400", null);
+        createMenuItems(vendor6, Arrays.asList(
+            new String[]{"Paneer Roll", "Spicy paneer wrap", "90.0", "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=200", "Main Course", "true"},
+            new String[]{"Chicken Tikka Roll", "Tandoori chicken wrap", "120.0", "https://images.unsplash.com/photo-1593504049359-74330189a345?w=200", "Main Course", "false"},
+            new String[]{"Egg Roll", "Classic egg roll", "80.0", "https://images.unsplash.com/photo-1612240498434-0b7b9073e07e?w=200", "Main Course", "false"},
+            new String[]{"Veg Manchurian Roll", "Indo-Chinese veggie roll", "85.0", "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200", "Main Course", "true"},
+            new String[]{"Mutton Seekh Roll", "Spiced mutton seekh wrap", "140.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Main Course", "false"},
+            new String[]{"Aloo Tikki Roll", "Potato patty wrap", "70.0", "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200", "Main Course", "true"}
+        ));
+
+        Vendor vendor7 = createVendor("Ice Cream Parlor", "Premium Ice Creams", 
+                "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400", null);
+        createMenuItems(vendor7, Arrays.asList(
+            new String[]{"Vanilla Scoop", "Classic vanilla ice cream", "60.0", "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=200", "Dessert", "true"},
+            new String[]{"Chocolate Scoop", "Rich chocolate ice cream", "60.0", "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=200", "Dessert", "true"},
+            new String[]{"Strawberry Scoop", "Fresh strawberry ice cream", "70.0", "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200", "Dessert", "true"},
+            new String[]{"Mango Scoop", "Tropical mango ice cream", "70.0", "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=200", "Dessert", "true"},
+            new String[]{"Butterscotch Scoop", "Crunchy butterscotch ice cream", "65.0", "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=200", "Dessert", "true"},
+            new String[]{"Sundae Special", "Ice cream with toppings", "120.0", "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=200", "Dessert", "true"}
+        ));
+
+        Vendor vendor8 = createVendor("Dessert House", "Sweet Delights", 
+                "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400", null);
+        createMenuItems(vendor8, Arrays.asList(
+            new String[]{"Brownie", "Chocolate fudge brownie", "80.0", "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=200", "Dessert", "true"},
+            new String[]{"Cheesecake", "New York style cheesecake", "150.0", "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=200", "Dessert", "true"},
+            new String[]{"Rasmalai", "Traditional Indian sweet", "90.0", "https://images.unsplash.com/photo-1589301773859-bb024d3f4c5f?w=200", "Dessert", "true"},
+            new String[]{"Gajar Halwa", "Carrot pudding", "70.0", "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=200", "Dessert", "true"},
+            new String[]{"Chocolate Mousse", "Light chocolate mousse", "110.0", "https://images.unsplash.com/photo-1541599540903-216a46934c0b?w=200", "Dessert", "true"},
+            new String[]{"Fruit Custard", "Mixed fruit custard", "80.0", "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200", "Dessert", "true"}
         ));
 
         // Create settings
@@ -149,10 +183,16 @@ public class DataInitializer implements CommandLineRunner {
             menuItem.setImageUrl(itemData[3]);
             menuItem.setCategory(itemData[4]);
             menuItem.setAvailable(true);
-            menuItem.setIsVeg(!itemData[0].toLowerCase().contains("chicken") && 
-                             !itemData[0].toLowerCase().contains("mutton") &&
-                             !itemData[0].toLowerCase().contains("beef") &&
-                             !itemData[0].toLowerCase().contains("pepperoni"));
+            // If isVeg is provided (6th element), use it; otherwise, auto-detect
+            if (itemData.length > 5) {
+                menuItem.setIsVeg(Boolean.parseBoolean(itemData[5]));
+            } else {
+                menuItem.setIsVeg(!itemData[0].toLowerCase().contains("chicken") && 
+                                 !itemData[0].toLowerCase().contains("mutton") &&
+                                 !itemData[0].toLowerCase().contains("beef") &&
+                                 !itemData[0].toLowerCase().contains("pepperoni") &&
+                                 !itemData[0].toLowerCase().contains("egg"));
+            }
             menuItemRepository.save(menuItem);
         }
     }

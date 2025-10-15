@@ -93,8 +93,16 @@ The application comes with pre-seeded data for testing:
 
 ## 📊 Seeded Data
 
-- **5 Vendors**: Biryani House, Dosa Corner, Burger Junction, Pizza Paradise, Thali Express
-- **30 Menu Items**: 6 items per vendor with images and descriptions
+- **8 Vendors**: 
+  - Biryani House (North Indian)
+  - Dosa Corner (South Indian)
+  - Burger Junction (American Fast Food)
+  - Pizza Paradise (Italian Pizzas)
+  - Thali Express (North Indian Thali)
+  - Roll Junction (Rolls & Wraps)
+  - Ice Cream Parlor (Ice Creams)
+  - Dessert House (Desserts)
+- **50+ Menu Items**: With proper veg/non-veg classification
 - **3 Delivery Slots**: Evening time slots
 - **3 Users**: Customer, Admin, and Vendor accounts
 
