@@ -78,6 +78,8 @@ mvn spring-boot:run
 
 The backend server will start on `http://localhost:8080`
 
+**Database Tables**: Tables are automatically created on startup using Hibernate's `ddl-auto=update` mode. No manual SQL script execution is required. See [DATABASE_CONFIGURATION.md](DATABASE_CONFIGURATION.md) for detailed information.
+
 **H2 Console Access**: `http://localhost:8080/h2-console`
 - JDBC URL: `jdbc:h2:mem:srmiggydb`
 - Username: `sa`
@@ -380,6 +382,9 @@ cat dist/assets/index-*.css | head -5
 
 ### Development Setup
 - This is a development setup with H2 in-memory database
+- **Tables are automatically created** on startup using Hibernate's `update` mode
+- **No manual SQL scripts needed** - the DataInitializer seeds all data automatically
+- See [DATABASE_CONFIGURATION.md](DATABASE_CONFIGURATION.md) for detailed database setup information
 - **For Production**: Use Supabase PostgreSQL (see setup guides below)
 - Tailwind CSS is configured with PostCSS and works in both dev and production builds
 - Frontend uses Vite for fast development and optimized production builds
