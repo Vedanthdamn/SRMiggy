@@ -1,4 +1,4 @@
-# SRMiggy 2.0 - Campus Food Delivery Platform
+# SRMiggy - Campus Food Delivery Platform
 
 SRMiggy is a full-stack food delivery website designed for SRM students to order food online from Java Canteen vendors and get it delivered to their doorstep.
 
