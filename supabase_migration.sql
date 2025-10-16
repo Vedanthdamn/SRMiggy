@@ -4,7 +4,37 @@
 -- ============================================
 -- IMPORTANT: Run this script in Supabase SQL Editor
 -- This script is idempotent - safe to run multiple times
+-- 
+-- PREREQUISITES:
+-- 1. Tables must exist before running this script
+-- 2. Run supabase-schema.sql FIRST if tables don't exist
+-- 3. See backend/src/main/resources/supabase-schema.sql
 -- ============================================
+
+-- Check if required tables exist, exit with helpful message if not
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_tables WHERE schemaname = 'public' AND tablename = 'vendors') THEN
+        RAISE EXCEPTION 'ERROR: Table "vendors" does not exist!
+        
+SOLUTION: You need to create the database tables first.
+
+STEPS TO FIX:
+1. Run the schema creation script FIRST:
+   - Location: backend/src/main/resources/supabase-schema.sql
+   - Copy and paste it into Supabase SQL Editor
+   - Click Run to create all tables
+
+2. Then run THIS script (supabase_migration.sql) to insert data
+
+For detailed instructions, see README.md section "Quick Start with Supabase"
+' USING ERRCODE = '42P01';
+    END IF;
+    
+    IF NOT EXISTS (SELECT FROM pg_tables WHERE schemaname = 'public' AND tablename = 'menu_items') THEN
+        RAISE EXCEPTION 'ERROR: Table "menu_items" does not exist! Please run supabase-schema.sql first.' USING ERRCODE = '42P01';
+    END IF;
+END $$;
 
 -- Start transaction for atomic operation
 BEGIN;
