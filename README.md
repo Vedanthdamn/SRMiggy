@@ -415,19 +415,30 @@ cat dist/assets/index-*.css | head -5
 ### Quick Start with Supabase
 ```bash
 # 1. Create Supabase project at https://supabase.com
-# 2. Run schema SQL in Supabase SQL Editor (backend/src/main/resources/supabase-schema.sql)
-# 3. Run migration SQL (supabase_migration.sql) - FIXED FOR RLS AND IDEMPOTENCY
+
+# 2. Run schema SQL FIRST in Supabase SQL Editor
+#    File: backend/src/main/resources/supabase-schema.sql
+#    This creates all tables
+
+# 3. Run migration SQL SECOND in Supabase SQL Editor  
+#    File: supabase_migration.sql (in root directory)
+#    This inserts vendor and menu data
+
 # 4. Update connection details in backend/src/main/resources/application-supabase.properties
+
 # 5. Run backend with Supabase profile
 mvn spring-boot:run -Dspring-boot.run.profiles=supabase
 ```
 
-**✨ Migration Script Fixed!** The `supabase_migration.sql` file has been updated to:
+**⚠️ IMPORTANT: Run scripts in order!** If you get "relation does not exist" error, see [SUPABASE_DATABASE_SETUP.md](SUPABASE_DATABASE_SETUP.md)
+
+**✨ Migration Script Updated!** The `supabase_migration.sql` file now includes:
+- ✅ Table existence checks with helpful error messages
 - ✅ Handle Row Level Security (RLS) automatically
-- ✅ Be idempotent (safe to re-run)
-- ✅ Use transactions for atomicity
-- ✅ See [QUICKSTART_MIGRATION.md](QUICKSTART_MIGRATION.md) for quick start guide
-- ✅ See [SUPABASE_MIGRATION_README.md](SUPABASE_MIGRATION_README.md) for detailed documentation
+- ✅ Idempotent (safe to re-run)
+- ✅ Atomic transactions
+- ✅ See [SUPABASE_DATABASE_SETUP.md](SUPABASE_DATABASE_SETUP.md) for complete setup guide
+- ✅ See [QUICKSTART_MIGRATION.md](QUICKSTART_MIGRATION.md) for quick reference
 
 See detailed guides for complete instructions.
 
