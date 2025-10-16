@@ -416,11 +416,18 @@ cat dist/assets/index-*.css | head -5
 ```bash
 # 1. Create Supabase project at https://supabase.com
 # 2. Run schema SQL in Supabase SQL Editor (backend/src/main/resources/supabase-schema.sql)
-# 3. Run seed data SQL (backend/src/main/resources/supabase-seed-data.sql)
+# 3. Run migration SQL (supabase_migration.sql) - FIXED FOR RLS AND IDEMPOTENCY
 # 4. Update connection details in backend/src/main/resources/application-supabase.properties
 # 5. Run backend with Supabase profile
 mvn spring-boot:run -Dspring-boot.run.profiles=supabase
 ```
+
+**✨ Migration Script Fixed!** The `supabase_migration.sql` file has been updated to:
+- ✅ Handle Row Level Security (RLS) automatically
+- ✅ Be idempotent (safe to re-run)
+- ✅ Use transactions for atomicity
+- ✅ See [QUICKSTART_MIGRATION.md](QUICKSTART_MIGRATION.md) for quick start guide
+- ✅ See [SUPABASE_MIGRATION_README.md](SUPABASE_MIGRATION_README.md) for detailed documentation
 
 See detailed guides for complete instructions.
 
