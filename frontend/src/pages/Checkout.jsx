@@ -99,8 +99,8 @@ const Checkout = () => {
         // Pay with wallet
         await paymentAPI.payWithWallet(orderId);
       } else if (paymentMethod === 'cod') {
-        // For COD, no payment processing needed, order is already created
-        // Just continue to success page
+        // For COD, confirm the order and create payment transaction
+        await paymentAPI.confirmCOD(orderId);
       } else {
         // Create payment order for online payment
         const paymentResponse = await paymentAPI.createOrder(orderId);
@@ -125,6 +125,8 @@ const Checkout = () => {
       });
     } catch (error) {
       console.error('Error placing order:', error);
+      const errorMessage = error.response?.data?.error || error.message || 'Unknown error occurred';
+      alert(`Failed to place order: ${errorMessage}`);
       // Navigate to order failed page on error
       navigate('/order-failed');
     } finally {

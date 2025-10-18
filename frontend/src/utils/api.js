@@ -48,6 +48,7 @@ export const paymentAPI = {
   verify: (paymentData) => api.post('/payments/verify', paymentData),
   getByOrderId: (orderId) => api.get(`/payments/order/${orderId}`),
   payWithWallet: (orderId) => api.post(`/payments/pay-with-wallet?orderId=${orderId}`),
+  confirmCOD: (orderId) => api.post(`/payments/confirm-cod?orderId=${orderId}`),
 };
 
 export const adminAPI = {

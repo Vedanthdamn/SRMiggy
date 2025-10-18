@@ -20,12 +20,12 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody CreateOrderRequest request, Authentication authentication) {
+    public ResponseEntity<?> createOrder(@RequestBody CreateOrderRequest request, Authentication authentication) {
         try {
             Order order = orderService.createOrder(request, authentication.getName());
             return ResponseEntity.ok(order);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Map.of("error", e.getMessage()));
         }
     }
 
