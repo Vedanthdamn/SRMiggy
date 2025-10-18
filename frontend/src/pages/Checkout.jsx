@@ -18,11 +18,14 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('mock');
   const [walletBalance, setWalletBalance] = useState(0);
   const [isOrderingOpen, setIsOrderingOpen] = useState(true);
+  const [loyaltyPoints, setLoyaltyPoints] = useState(0);
+  const [pointsToEarn, setPointsToEarn] = useState(0);
   const useLoyaltyPoints = location.state?.useLoyaltyPoints || false;
 
   useEffect(() => {
     loadSlots();
     loadWalletBalance();
+    loadLoyaltyInfo();
   }, []);
 
   const loadSlots = async () => {
@@ -41,6 +44,20 @@ const Checkout = () => {
       setWalletBalance(response.data);
     } catch (error) {
       console.error('Error loading wallet balance:', error);
+    }
+  };
+
+  const loadLoyaltyInfo = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      const subtotal = getTotal();
+      const response = await walletAPI.calculateLoyaltyPoints(subtotal);
+      setLoyaltyPoints(response.data.currentPoints);
+      setPointsToEarn(response.data.pointsEarnedFromOrder);
+    } catch (error) {
+      console.error('Error loading loyalty info:', error);
     }
   };
 
@@ -113,7 +130,11 @@ const Checkout = () => {
   const DELIVERY_FEE = 10;
   const subtotal = getTotal();
   const deliveryFee = subtotal < 100 ? DELIVERY_FEE : 0;
-  const total = subtotal + deliveryFee + PLATFORM_FEE;
+  
+  // Calculate loyalty discount
+  const baseTotal = subtotal + deliveryFee + PLATFORM_FEE;
+  const loyaltyDiscount = useLoyaltyPoints ? Math.min(loyaltyPoints, baseTotal) : 0;
+  const total = baseTotal - loyaltyDiscount;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 transition-all duration-500">
@@ -267,6 +288,42 @@ const Checkout = () => {
               </div>
             </div>
 
+            {/* Campus Loyalty Program Section */}
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <span className="mr-2">🏫</span> Campus Loyalty Program
+              </h2>
+              <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/30 dark:via-indigo-900/30 dark:to-purple-900/30 rounded-2xl p-5 shadow-lg backdrop-blur-sm border border-blue-200/50 dark:border-blue-700/50">
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between items-center bg-white/50 dark:bg-gray-800/50 p-3 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Available Points:</span>
+                    <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                      {loyaltyPoints.toFixed(1)} pts (₹{loyaltyPoints.toFixed(2)})
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center bg-white/50 dark:bg-gray-800/50 p-3 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">You'll Earn:</span>
+                    <span className="font-bold text-lg text-green-600 dark:text-green-400">+{pointsToEarn.toFixed(1)} pts</span>
+                  </div>
+                  {useLoyaltyPoints && loyaltyPoints > 0 && (
+                    <div className="flex justify-between items-center bg-white/50 dark:bg-gray-800/50 p-3 rounded-lg border-2 border-green-400 dark:border-green-600">
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">Points Applied:</span>
+                      <span className="font-bold text-lg text-green-600 dark:text-green-400">-{loyaltyDiscount.toFixed(1)} pts</span>
+                    </div>
+                  )}
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-3 bg-white/30 dark:bg-gray-800/30 p-2 rounded-lg">
+                    ✨ Earn 0.5 points for every ₹100 spent • 1 point = ₹1 discount
+                  </p>
+                  {useLoyaltyPoints && loyaltyPoints > 0 && (
+                    <div className="text-sm text-green-600 dark:text-green-400 font-bold bg-green-50 dark:bg-green-900/20 p-3 rounded-lg flex items-center animate-pulse-soft">
+                      <span className="mr-2">🎉</span> 
+                      You're saving ₹{loyaltyDiscount.toFixed(2)} with loyalty points!
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* Order Summary */}
             <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
               <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -300,6 +357,12 @@ const Checkout = () => {
                     <span className="text-sm">Platform Fee</span>
                     <span className="font-semibold">₹{PLATFORM_FEE.toFixed(2)}</span>
                   </div>
+                  {loyaltyDiscount > 0 && (
+                    <div className="flex justify-between text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 p-2 rounded-lg animate-slide-down">
+                      <span className="font-medium">🎉 Loyalty Discount</span>
+                      <span className="font-bold">-₹{loyaltyDiscount.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-2xl font-bold text-gray-900 dark:text-white pt-3 border-t-2 dark:border-gray-600">
                     <span>Total</span>
                     <span className="bg-gradient-to-r from-primary-600 to-orange-600 dark:from-orange-400 dark:to-orange-500 bg-clip-text text-transparent">
