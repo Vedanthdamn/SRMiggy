@@ -19,22 +19,22 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<PaymentOrderResponse> createPaymentOrder(@RequestParam UUID orderId) {
+    public ResponseEntity<?> createPaymentOrder(@RequestParam UUID orderId) {
         try {
             PaymentOrderResponse response = paymentService.createPaymentOrder(orderId);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Map.of("error", e.getMessage()));
         }
     }
 
     @PostMapping("/verify")
-    public ResponseEntity<PaymentTransaction> verifyPayment(@RequestBody PaymentVerifyRequest request) {
+    public ResponseEntity<?> verifyPayment(@RequestBody PaymentVerifyRequest request) {
         try {
             PaymentTransaction transaction = paymentService.verifyPayment(request);
             return ResponseEntity.ok(transaction);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Map.of("error", e.getMessage()));
         }
     }
 
@@ -48,7 +48,7 @@ public class PaymentController {
     }
 
     @PostMapping("/pay-with-wallet")
-    public ResponseEntity<PaymentTransaction> payWithWallet(
+    public ResponseEntity<?> payWithWallet(
             @RequestParam UUID orderId,
             org.springframework.security.core.Authentication authentication) {
         try {
@@ -56,7 +56,20 @@ public class PaymentController {
             PaymentTransaction transaction = paymentService.payWithWallet(orderId, username);
             return ResponseEntity.ok(transaction);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(java.util.Map.of("error", e.getMessage()));
+        }
+    }
+
+    @PostMapping("/confirm-cod")
+    public ResponseEntity<?> confirmCOD(
+            @RequestParam UUID orderId,
+            org.springframework.security.core.Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            PaymentTransaction transaction = paymentService.confirmCODPayment(orderId, username);
+            return ResponseEntity.ok(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(java.util.Map.of("error", e.getMessage()));
         }
     }
 }
