@@ -13,6 +13,7 @@ import VendorMenu from './pages/VendorMenu';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import OrderFailed from './pages/OrderFailed';
 import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
 import Wallet from './pages/Wallet';
@@ -67,6 +68,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <OrderSuccess />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/order-failed"
+                  element={
+                    <ProtectedRoute>
+                      <OrderFailed />
                     </ProtectedRoute>
                   }
                 />
