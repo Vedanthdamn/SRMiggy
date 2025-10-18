@@ -125,4 +125,39 @@ public class PaymentService {
 
         return paymentTransactionRepository.save(transaction);
     }
+
+    @Transactional
+    public PaymentTransaction confirmCODPayment(UUID orderId, String username) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        if (order.getStatus() != OrderStatus.PENDING) {
+            throw new RuntimeException("Order is not in pending state");
+        }
+
+        // Verify the order belongs to the user
+        if (!order.getCustomer().getUsername().equals(username)) {
+            throw new RuntimeException("Unauthorized access to order");
+        }
+
+        // Create payment transaction for COD
+        PaymentTransaction transaction = new PaymentTransaction();
+        transaction.setOrder(order);
+        transaction.setAmount(order.getTotal());
+        transaction.setStatus(PaymentStatus.PENDING); // Will be SUCCESS when delivered
+        transaction.setProvider("COD");
+        transaction.setProviderOrderId("COD_" + UUID.randomUUID().toString());
+        transaction.setProviderPaymentId("COD_PAY_" + orderId);
+
+        // Update order status
+        order.setStatus(OrderStatus.CONFIRMED);
+        orderRepository.save(order);
+
+        // Award loyalty points to customer
+        if (order.getLoyaltyPointsEarned() > 0) {
+            loyaltyService.addLoyaltyPoints(username, order.getLoyaltyPointsEarned());
+        }
+
+        return paymentTransactionRepository.save(transaction);
+    }
 }

@@ -59,4 +59,17 @@ public class PaymentController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PostMapping("/confirm-cod")
+    public ResponseEntity<PaymentTransaction> confirmCOD(
+            @RequestParam UUID orderId,
+            org.springframework.security.core.Authentication authentication) {
+        try {
+            String username = authentication.getName();
+            PaymentTransaction transaction = paymentService.confirmCODPayment(orderId, username);
+            return ResponseEntity.ok(transaction);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }
