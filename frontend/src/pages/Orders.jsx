@@ -22,51 +22,59 @@ const Orders = () => {
 
   const getStatusColor = (status) => {
     const colors = {
-      PENDING: 'bg-yellow-100 text-yellow-800',
-      CONFIRMED: 'bg-blue-100 text-blue-800',
-      PREPARING: 'bg-purple-100 text-purple-800',
-      READY: 'bg-indigo-100 text-indigo-800',
-      OUT_FOR_DELIVERY: 'bg-orange-100 text-orange-800',
-      DELIVERED: 'bg-green-100 text-green-800',
-      CANCELLED: 'bg-red-100 text-red-800',
+      PENDING: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-700',
+      CONFIRMED: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 border border-blue-200 dark:border-blue-700',
+      PREPARING: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400 border border-purple-200 dark:border-purple-700',
+      READY: 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-700',
+      OUT_FOR_DELIVERY: 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-400 border border-orange-200 dark:border-orange-700',
+      DELIVERED: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400 border border-green-200 dark:border-green-700',
+      CANCELLED: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 border border-red-200 dark:border-red-700',
     };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || 'bg-gray-100 dark:bg-gray-800/30 text-gray-800 dark:text-gray-400';
   };
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-xl text-gray-600">Loading orders...</div>
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-all duration-500">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary-500 dark:border-orange-500 mx-auto mb-4"></div>
+          <div className="text-xl text-gray-600 dark:text-gray-400 animate-pulse-soft">Loading orders...</div>
+        </div>
       </div>
     );
   }
 
   if (orders.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">No orders yet</h2>
-          <p className="text-gray-600 mb-6">Start ordering from your favorite vendors!</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-all duration-500">
+        <div className="text-center animate-fade-in">
+          <div className="text-6xl mb-4 animate-bounce-soft">📦</div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">No orders yet</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">Start ordering from your favorite vendors!</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 transition-all duration-500">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">My Orders</h1>
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-orange-600 dark:from-orange-400 dark:to-orange-500 bg-clip-text text-transparent mb-8 animate-slide-up">📦 My Orders</h1>
 
         <div className="space-y-6">
-          {orders.map((order) => (
-            <div key={order.id} className="bg-white rounded-lg shadow-md p-6">
+          {orders.map((order, index) => (
+            <div 
+              key={order.id} 
+              className="backdrop-blur-lg bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg dark:shadow-dark-glass p-6 border border-gray-200/50 dark:border-gray-700/50 hover:scale-[1.01] transition-all duration-300 animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900">
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                     Order #{order.id}
                   </h2>
-                  <p className="text-gray-600">{order.vendor.name}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-gray-600 dark:text-gray-400 font-medium">{order.vendor.name}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-500">
                     {new Date(order.createdAt).toLocaleString()}
                   </p>
                 </div>
@@ -79,31 +87,31 @@ const Orders = () => {
                 </span>
               </div>
 
-              <div className="border-t pt-4">
-                <h3 className="font-semibold mb-2">Items:</h3>
-                <ul className="space-y-1 mb-4">
+              <div className="border-t dark:border-gray-700 pt-4">
+                <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Items:</h3>
+                <ul className="space-y-2 mb-4">
                   {order.items.map((item) => (
-                    <li key={item.id} className="flex justify-between text-gray-700">
-                      <span>
+                    <li key={item.id} className="flex justify-between text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-lg">
+                      <span className="font-medium">
                         {item.menuItem.name} x {item.quantity}
                       </span>
-                      <span>₹{item.subtotal.toFixed(2)}</span>
+                      <span className="font-bold">₹{item.subtotal.toFixed(2)}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="flex justify-between items-center border-t pt-4">
+                <div className="flex justify-between items-center border-t dark:border-gray-700 pt-4 bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
                   <div>
-                    <p className="text-sm text-gray-600">
-                      Delivery Slot: {order.deliverySlot.displayName}
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <span className="font-medium">Delivery Slot:</span> {order.deliverySlot.displayName}
                     </p>
-                    <p className="text-sm text-gray-600">
-                      Address: {order.deliveryAddress}
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <span className="font-medium">Address:</span> {order.deliveryAddress}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-600">Total</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">Total</p>
+                    <p className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-orange-600 dark:from-orange-400 dark:to-orange-500 bg-clip-text text-transparent">
                       ₹{order.total.toFixed(2)}
                     </p>
                   </div>
