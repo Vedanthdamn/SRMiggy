@@ -125,6 +125,8 @@ const Checkout = () => {
       });
     } catch (error) {
       console.error('Error placing order:', error);
+      const errorMessage = error.response?.data?.error || error.message || 'Unknown error occurred';
+      alert(`Failed to place order: ${errorMessage}`);
       // Navigate to order failed page on error
       navigate('/order-failed');
     } finally {
