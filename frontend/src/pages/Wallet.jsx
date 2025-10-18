@@ -61,12 +61,12 @@ const Wallet = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-8 transition-all duration-500">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">My Wallet</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 animate-slide-up">💰 My Wallet</h1>
 
         {/* Balance Card */}
-        <div className="bg-gradient-to-r from-primary to-purple-600 rounded-lg shadow-lg p-8 mb-8 text-white">
+        <div className="bg-gradient-to-r from-primary-500 to-purple-600 dark:from-orange-500 dark:to-purple-700 rounded-2xl shadow-lg dark:shadow-dark-glass p-8 mb-8 text-white animate-fade-in border border-purple-200/50 dark:border-purple-700/50">
           <div className="flex justify-between items-center">
             <div>
               <p className="text-sm opacity-90 mb-2">Available Balance</p>
@@ -77,17 +77,19 @@ const Wallet = () => {
         </div>
 
         {/* Add Money Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Add Money</h2>
+        <div className="backdrop-blur-lg bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg dark:shadow-dark-glass p-6 mb-8 border border-gray-200/50 dark:border-gray-700/50 animate-slide-up transition-all duration-300">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <span className="mr-2">💵</span> Add Money
+          </h2>
           
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl mb-4 animate-slide-down">
               {error}
             </div>
           )}
           
           {success && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <div className="bg-green-100 dark:bg-green-900/30 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-400 px-4 py-3 rounded-xl mb-4 animate-slide-down">
               {success}
             </div>
           )}
@@ -101,42 +103,42 @@ const Wallet = () => {
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 placeholder="Enter amount"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary focus:border-primary"
+                className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-gradient-to-r from-primary-500 to-orange-600 dark:from-orange-500 dark:to-orange-700 text-white px-6 py-3 rounded-xl hover:shadow-glow hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 font-semibold"
             >
               {loading ? 'Processing...' : 'Add Money'}
             </button>
           </form>
 
           {/* Quick Amount Buttons */}
-          <div className="mt-4 flex gap-2">
+          <div className="mt-4 flex gap-2 flex-wrap">
             <button
               onClick={() => setAmount('100')}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105 font-medium"
             >
               ₹100
             </button>
             <button
               onClick={() => setAmount('500')}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105 font-medium"
             >
               ₹500
             </button>
             <button
               onClick={() => setAmount('1000')}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105 font-medium"
             >
               ₹1000
             </button>
             <button
               onClick={() => setAmount('2000')}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+              className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105 font-medium"
             >
               ₹2000
             </button>
@@ -144,23 +146,26 @@ const Wallet = () => {
         </div>
 
         {/* Transaction History */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Transaction History</h2>
+        <div className="backdrop-blur-lg bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-lg dark:shadow-dark-glass p-6 border border-gray-200/50 dark:border-gray-700/50 animate-slide-up transition-all duration-300">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <span className="mr-2">📋</span> Transaction History
+          </h2>
           
           {transactions.length === 0 ? (
-            <p className="text-gray-500 text-center py-8">No transactions yet</p>
+            <p className="text-gray-500 dark:text-gray-400 text-center py-8">No transactions yet</p>
           ) : (
             <div className="space-y-4">
-              {transactions.map((transaction) => (
+              {transactions.map((transaction, index) => (
                 <div
                   key={transaction.id}
-                  className="flex justify-between items-center border-b border-gray-200 pb-4 last:border-b-0"
+                  className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 rounded-lg transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-gray-900 dark:text-white">
                       {transaction.description}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       {formatDate(transaction.createdAt)}
                     </p>
                   </div>
@@ -168,14 +173,14 @@ const Wallet = () => {
                     <p
                       className={`text-lg font-semibold ${
                         transaction.type === 'CREDIT'
-                          ? 'text-green-600'
-                          : 'text-red-600'
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-red-600 dark:text-red-400'
                       }`}
                     >
                       {transaction.type === 'CREDIT' ? '+' : '-'}₹
                       {transaction.amount.toFixed(2)}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       Balance: ₹{transaction.balanceAfter.toFixed(2)}
                     </p>
                   </div>
