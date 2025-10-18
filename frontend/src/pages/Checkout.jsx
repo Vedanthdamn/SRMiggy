@@ -98,8 +98,11 @@ const Checkout = () => {
       if (paymentMethod === 'wallet') {
         // Pay with wallet
         await paymentAPI.payWithWallet(orderId);
+      } else if (paymentMethod === 'cod') {
+        // For COD, no payment processing needed, order is already created
+        // Just continue to success page
       } else {
-        // Create payment order
+        // Create payment order for online payment
         const paymentResponse = await paymentAPI.createOrder(orderId);
         const { providerOrderId } = paymentResponse.data;
 
@@ -117,10 +120,13 @@ const Checkout = () => {
 
       // Clear cart and navigate to success page
       clearCart();
-      navigate(`/order-success/${orderId}`);
+      navigate(`/order-success/${orderId}`, { 
+        state: { paymentMethod } 
+      });
     } catch (error) {
       console.error('Error placing order:', error);
-      alert(error.response?.data?.message || 'Failed to place order');
+      // Navigate to order failed page on error
+      navigate('/order-failed');
     } finally {
       setLoading(false);
     }
@@ -281,6 +287,29 @@ const Checkout = () => {
                       </div>
                     </div>
                     {paymentMethod === 'mock' && (
+                      <span className="text-primary-600 dark:text-orange-400 text-2xl animate-scale-up">✓</span>
+                    )}
+                  </div>
+                </div>
+                <div
+                  onClick={() => setPaymentMethod('cod')}
+                  className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-300 ${
+                    paymentMethod === 'cod'
+                      ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/30 dark:to-orange-900/30 shadow-lg scale-[1.02]'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-orange-400 hover:scale-[1.01] bg-white dark:bg-gray-700'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <span className="text-3xl mr-3">💵</span>
+                      <div>
+                        <div className="font-bold text-gray-900 dark:text-white">Cash on Delivery</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                          Pay when you receive your order
+                        </div>
+                      </div>
+                    </div>
+                    {paymentMethod === 'cod' && (
                       <span className="text-primary-600 dark:text-orange-400 text-2xl animate-scale-up">✓</span>
                     )}
                   </div>
