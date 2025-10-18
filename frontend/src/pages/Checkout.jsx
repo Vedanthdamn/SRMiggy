@@ -116,77 +116,91 @@ const Checkout = () => {
   const total = subtotal + deliveryFee + PLATFORM_FEE;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 transition-all duration-500">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-6">Checkout</h1>
+        <div className="backdrop-blur-lg bg-white/80 dark:bg-gray-800/80 rounded-2xl shadow-glass dark:shadow-dark-glass p-8 border border-gray-200/50 dark:border-gray-700/50 animate-slide-up">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-orange-600 dark:from-orange-400 dark:to-orange-500 bg-clip-text text-transparent mb-8">
+            Checkout
+          </h1>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {/* Delivery Details */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Delivery Details</h2>
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <span className="mr-2">📍</span> Delivery Details
+              </h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Delivery Address
                   </label>
                   <input
                     type="text"
                     value={deliveryAddress}
                     onChange={(e) => setDeliveryAddress(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                     required
+                    placeholder="Enter your delivery address"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Phone Number
                   </label>
                   <input
                     type="tel"
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary"
+                    className="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300"
                     required
+                    placeholder="Enter your phone number"
                   />
                 </div>
               </div>
             </div>
 
             {/* Delivery Slot Selection */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Select Delivery Slot</h2>
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <span className="mr-2">⏰</span> Select Delivery Slot
+              </h2>
               {!isOrderingOpen ? (
-                <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6 text-center">
-                  <div className="text-red-600 text-lg font-semibold mb-2">
-                    ⏰ Ordering Closed for Today
+                <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 border-2 border-red-400 dark:border-red-500 rounded-xl p-6 text-center animate-fade-in">
+                  <div className="text-red-600 dark:text-red-400 text-xl font-bold mb-3 flex items-center justify-center">
+                    <span className="text-3xl mr-2">⏰</span> Ordering Closed for Today
                   </div>
-                  <p className="text-gray-700">
-                    Please come back tomorrow between 11 AM and 7 PM to place your order.
+                  <p className="text-gray-800 dark:text-gray-200 font-medium">
+                    Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">11 AM – 7 PM</span> to place your order.
                   </p>
                 </div>
               ) : slots.length === 0 ? (
-                <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 text-center">
-                  <div className="text-yellow-600 text-lg font-semibold mb-2">
-                    ⚠️ No Available Slots
+                <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/30 dark:to-yellow-800/30 border-2 border-yellow-400 dark:border-yellow-500 rounded-xl p-6 text-center animate-fade-in">
+                  <div className="text-yellow-600 dark:text-yellow-400 text-xl font-bold mb-3 flex items-center justify-center">
+                    <span className="text-3xl mr-2">⚠️</span> No Available Slots
                   </div>
-                  <p className="text-gray-700">
-                    All delivery slots for today have passed. Please come back tomorrow between 11 AM and 7 PM.
+                  <p className="text-gray-800 dark:text-gray-200 font-medium">
+                    All delivery slots for today have passed. Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">11 AM – 7 PM</span>.
                   </p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {slots.map((slot) => (
+                  {slots.map((slot, index) => (
                     <button
                       key={slot.id}
                       onClick={() => setSelectedSlot(slot.id.toString())}
-                      className={`p-4 border-2 rounded-lg text-center ${
+                      className={`p-5 border-2 rounded-xl text-center transition-all duration-300 font-semibold animate-fade-in ${
                         selectedSlot === slot.id.toString()
-                          ? 'border-primary bg-primary bg-opacity-10'
-                          : 'border-gray-300 hover:border-primary'
+                          ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/30 dark:to-orange-900/30 shadow-glow scale-105 text-primary-700 dark:text-orange-300'
+                          : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-orange-400 hover:scale-105 hover:shadow-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
+                      style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <div className="font-semibold">{slot.displayName}</div>
+                      <div className="text-lg mb-1">{slot.displayName}</div>
+                      {selectedSlot === slot.id.toString() && (
+                        <div className="text-sm text-green-600 dark:text-green-400 font-bold animate-bounce-soft">
+                          ✓ Selected
+                        </div>
+                      )}
                     </button>
                   ))}
                 </div>
@@ -194,57 +208,59 @@ const Checkout = () => {
             </div>
 
             {/* Payment Method Selection */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Payment Method</h2>
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <span className="mr-2">💳</span> Payment Method
+              </h2>
               <div className="space-y-3">
                 <div
                   onClick={() => setPaymentMethod('wallet')}
-                  className={`p-4 border-2 rounded-lg cursor-pointer ${
+                  className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-300 ${
                     paymentMethod === 'wallet'
-                      ? 'border-primary bg-primary bg-opacity-10'
-                      : 'border-gray-300 hover:border-primary'
+                      ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/30 dark:to-orange-900/30 shadow-lg scale-[1.02]'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-orange-400 hover:scale-[1.01] bg-white dark:bg-gray-700'
                   }`}
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <span className="text-2xl mr-3">💰</span>
+                      <span className="text-3xl mr-3">💰</span>
                       <div>
-                        <div className="font-semibold">Wallet</div>
-                        <div className="text-sm text-gray-600">
-                          Available Balance: ₹{walletBalance.toFixed(2)}
+                        <div className="font-bold text-gray-900 dark:text-white">Wallet</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                          Available Balance: <span className="font-bold text-green-600 dark:text-green-400">₹{walletBalance.toFixed(2)}</span>
                         </div>
                       </div>
                     </div>
                     {paymentMethod === 'wallet' && (
-                      <span className="text-primary">✓</span>
+                      <span className="text-primary-600 dark:text-orange-400 text-2xl animate-scale-up">✓</span>
                     )}
                   </div>
                   {paymentMethod === 'wallet' && walletBalance < total && (
-                    <div className="mt-2 text-sm text-red-600">
-                      Insufficient balance. Please add ₹{(total - walletBalance).toFixed(2)} more.
+                    <div className="mt-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg font-medium animate-slide-down">
+                      ⚠️ Insufficient balance. Please add ₹{(total - walletBalance).toFixed(2)} more.
                     </div>
                   )}
                 </div>
                 <div
                   onClick={() => setPaymentMethod('mock')}
-                  className={`p-4 border-2 rounded-lg cursor-pointer ${
+                  className={`p-5 border-2 rounded-xl cursor-pointer transition-all duration-300 ${
                     paymentMethod === 'mock'
-                      ? 'border-primary bg-primary bg-opacity-10'
-                      : 'border-gray-300 hover:border-primary'
+                      ? 'border-primary-500 bg-gradient-to-br from-primary-50 to-orange-50 dark:from-primary-900/30 dark:to-orange-900/30 shadow-lg scale-[1.02]'
+                      : 'border-gray-300 dark:border-gray-600 hover:border-primary-400 dark:hover:border-orange-400 hover:scale-[1.01] bg-white dark:bg-gray-700'
                   }`}
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <span className="text-2xl mr-3">💳</span>
+                      <span className="text-3xl mr-3">💳</span>
                       <div>
-                        <div className="font-semibold">Other Payment Methods</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="font-bold text-gray-900 dark:text-white">Other Payment Methods</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                           Credit/Debit Card, UPI, Net Banking
                         </div>
                       </div>
                     </div>
                     {paymentMethod === 'mock' && (
-                      <span className="text-primary">✓</span>
+                      <span className="text-primary-600 dark:text-orange-400 text-2xl animate-scale-up">✓</span>
                     )}
                   </div>
                 </div>
@@ -252,35 +268,43 @@ const Checkout = () => {
             </div>
 
             {/* Order Summary */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
-              <div className="space-y-2">
-                {cart.map((item) => (
-                  <div key={item.id} className="flex justify-between text-gray-700">
-                    <span>
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700/50 dark:to-gray-800/50 p-6 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <span className="mr-2">📋</span> Order Summary
+              </h2>
+              <div className="space-y-3">
+                {cart.map((item, index) => (
+                  <div 
+                    key={item.id} 
+                    className="flex justify-between text-gray-700 dark:text-gray-300 bg-white/50 dark:bg-gray-800/50 p-3 rounded-lg animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <span className="font-medium">
                       {item.name} x {item.quantity}
                     </span>
-                    <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="font-bold">₹{(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 ))}
-                <div className="border-t pt-2 mt-2">
-                  <div className="flex justify-between text-gray-700">
+                <div className="border-t-2 dark:border-gray-600 pt-4 mt-4 space-y-2">
+                  <div className="flex justify-between text-gray-700 dark:text-gray-300">
                     <span>Subtotal</span>
-                    <span>₹{subtotal.toFixed(2)}</span>
+                    <span className="font-semibold">₹{subtotal.toFixed(2)}</span>
                   </div>
                   {subtotal < 100 && (
-                    <div className="flex justify-between text-gray-700">
-                      <span>Delivery Fee (orders below ₹100)</span>
-                      <span>₹{deliveryFee.toFixed(2)}</span>
+                    <div className="flex justify-between text-amber-600 dark:text-amber-400">
+                      <span className="text-sm">Delivery Fee (orders below ₹100)</span>
+                      <span className="font-semibold">₹{deliveryFee.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between text-gray-700">
-                    <span>Platform Fee</span>
-                    <span>₹{PLATFORM_FEE.toFixed(2)}</span>
+                  <div className="flex justify-between text-gray-700 dark:text-gray-300">
+                    <span className="text-sm">Platform Fee</span>
+                    <span className="font-semibold">₹{PLATFORM_FEE.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-xl font-bold text-gray-900 mt-2">
+                  <div className="flex justify-between text-2xl font-bold text-gray-900 dark:text-white pt-3 border-t-2 dark:border-gray-600">
                     <span>Total</span>
-                    <span>₹{total.toFixed(2)}</span>
+                    <span className="bg-gradient-to-r from-primary-600 to-orange-600 dark:from-orange-400 dark:to-orange-500 bg-clip-text text-transparent">
+                      ₹{total.toFixed(2)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -289,9 +313,21 @@ const Checkout = () => {
             <button
               onClick={handlePlaceOrder}
               disabled={loading || !selectedSlot || !isOrderingOpen || (paymentMethod === 'wallet' && walletBalance < total)}
-              className="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-primary-500 to-orange-600 dark:from-orange-500 dark:to-orange-700 text-white py-4 rounded-xl hover:shadow-glow-lg hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 font-bold text-lg"
             >
-              {loading ? 'Processing...' : !isOrderingOpen ? 'Ordering Closed' : `Place Order & Pay ₹${total.toFixed(2)}`}
+              {loading ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+              ) : !isOrderingOpen ? (
+                '🔒 Ordering Closed'
+              ) : (
+                `Place Order & Pay ₹${total.toFixed(2)} →`
+              )}
             </button>
           </div>
         </div>

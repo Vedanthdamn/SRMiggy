@@ -6,16 +6,49 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 
 ## 🚀 Features
 
+### Core Features
 - **User Authentication**: JWT-based secure authentication with role-based access (Customer, Vendor, Admin, Rider)
-- **Vendor Management**: Browse multiple vendors and their menus
-- **Shopping Cart**: Add items to cart with real-time updates
-- **Delivery Slots**: Fixed time slots for efficient delivery (7:00-7:30 PM, 7:30-8:00 PM, 8:00-8:30 PM)
-- **Order Management**: Place orders with minimum value validation (₹100 + ₹2 platform fee)
+- **Vendor Management**: Browse multiple vendors with beautiful, modern cards
+- **Shopping Cart**: Add items to cart with real-time updates and smooth animations
+- **Order Management**: Place orders with smart fee calculations
 - **Digital Wallet**: Students can add money to their wallet and use it for payments
 - **Payment Integration**: Supports both wallet payment and mock payment provider for testing
-- **Campus Loyalty Program**: Earn points on every order and redeem them for discounts (see below)
 - **Admin Dashboard**: View statistics, manage orders and vendors
-- **Mobile-First Design**: Responsive UI built with Tailwind CSS
+
+### 🎨 Modern UI/UX Enhancements
+- **Professional Design**: Modern, glassy interface with smooth gradients and backdrop blur effects
+- **Micro Animations**: Subtle animations on buttons, cards, toggles, and interactions for delightful user experience
+- **Dark Mode**: Seamless dark/light mode toggle with smooth transitions across all components
+- **Responsive Design**: Fully responsive layout optimized for mobile, tablet, and desktop
+- **Hover Effects**: Interactive hover states with scale transformations and shadow effects
+- **Gradient Accents**: Beautiful gradient color schemes throughout the application
+
+### 🍽️ Smart Menu Features
+- **Veg/Non-Veg Toggle**: Dynamic filtering of menu items by dietary preference
+  - **All** - View complete menu
+  - **🟢 Veg** - Show only vegetarian items
+  - **🔴 Non-Veg** - Show only non-vegetarian items
+- **Visual Indicators**: Clear badges on food cards showing veg/non-veg status
+- **Item Count Display**: Shows number of filtered items dynamically
+
+### 💰 Dynamic Pricing & Fees
+- **Smart Delivery Fee**: ₹10 delivery fee automatically added for orders below ₹100
+- **Platform Fee**: ₹2 platform fee applied to all orders
+- **Real-time Calculations**: Total updates dynamically as you add/remove items
+- **Fee Transparency**: Clear breakdown showing subtotal, delivery fee, platform fee, and total
+
+### ⏰ Time-Based Ordering (11 AM – 7 PM)
+- **Operating Hours**: Orders accepted only between 11 AM and 7 PM
+- **Dynamic Slot Display**: Shows only available delivery slots based on current time
+- **Ordering Window**: System automatically detects if ordering is closed
+- **Smart Scheduling**: Backend validates slot availability in real-time
+
+### 🏫 Campus Loyalty Program
+- **Earn Points**: Get 0.5 loyalty points for every ₹100 spent on food
+- **Redeem Points**: Use your points for discounts (1 point = ₹1 off)
+- **Automatic Tracking**: Points are automatically added to your account after successful payment
+- **Flexible Usage**: Toggle points on/off in the cart to choose when to redeem
+- **Visual Feedback**: See available points and points to earn prominently displayed in cart
 
 ## 🏫 Campus Loyalty Program
 
@@ -26,10 +59,11 @@ SRMiggy rewards students for every order with our Campus Loyalty Program!
 - **Redeem Points**: Use your points for discounts (1 point = ₹1 off)
 - **Automatic Tracking**: Points are automatically added to your account after successful payment
 - **Flexible Usage**: Toggle points on/off in the cart to choose when to redeem
+- **Visual Display**: See available points and points you'll earn beautifully displayed in cart
 
 ### Using Loyalty Points:
 1. Add items to your cart and proceed to cart page
-2. View your available loyalty points and points you'll earn from this order
+2. View your available loyalty points and points you'll earn from this order in the glassy loyalty card
 3. Toggle "Use Loyalty Points" to apply your points as a discount
 4. Your points will be deducted from the order total at checkout
 5. After payment, new points from this order are automatically credited to your account
@@ -40,6 +74,24 @@ SRMiggy rewards students for every order with our Campus Loyalty Program!
 - Toggle on to save ₹50
 - Final total: ₹150
 - After payment, earn 1 point (0.5 × 2) from this ₹200 order
+
+## 📸 Screenshots
+
+### Home Page (Light Mode)
+![Home Page Light](https://github.com/user-attachments/assets/daa8d4d3-ae9c-4b05-9cce-bf399a26b91d)
+*Modern, gradient-based home page with vendor cards featuring hover effects and smooth animations*
+
+### Home Page (Dark Mode)
+![Home Page Dark](https://github.com/user-attachments/assets/74fba67d-6cae-4b7f-8cb4-2c183b2e58aa)
+*Seamless dark mode with smooth transitions and enhanced visual appeal*
+
+### Vendor Menu with Filter
+![Vendor Menu](https://github.com/user-attachments/assets/15abefdb-e377-4684-86e5-dee1582e478d)
+*Dynamic Veg/Non-Veg toggle filters with glassy UI elements and modern card designs*
+
+### Veg Filter Active
+![Veg Filter](https://github.com/user-attachments/assets/5734551f-f1f4-47ad-88af-d2e3c942fe3d)
+*Showing only vegetarian items with clear count display and smooth filtering animation*
 
 ## 📋 Tech Stack
 
@@ -56,8 +108,16 @@ SRMiggy rewards students for every order with our Campus Loyalty Program!
 - React 18
 - React Router DOM
 - Axios
-- Tailwind CSS
-- Vite
+- **Tailwind CSS v4.1.14** - Modern utility-first CSS framework
+- Vite - Lightning-fast build tool
+- **Custom Animations** - Smooth transitions and micro-interactions
+
+### Design Features
+- **Gradient System**: Beautiful orange-to-red gradients for primary actions
+- **Glassy Morphism**: Backdrop blur effects for modern card designs
+- **Animation Library**: Custom keyframe animations for fade-in, slide-up, scale, bounce, pulse, and shimmer effects
+- **Shadow System**: Multiple shadow variants including glow effects for buttons
+- **Dark Mode Support**: Complete dark theme with optimized colors and contrasts
 
 ## 🛠️ Setup Instructions
 
@@ -150,9 +210,12 @@ The application comes with pre-seeded data for testing:
 
 ## 🎯 Business Rules
 
-- **Minimum Order**: ₹100
-- **Platform Fee**: ₹2 (automatically added)
-- **Order Cutoff**: Orders accepted until 50 minutes before slot closing
+- **Operating Hours**: 11 AM – 7 PM daily for order placement
+- **Minimum Order**: ₹100 (orders below this incur ₹10 delivery fee)
+- **Platform Fee**: ₹2 (automatically added to all orders)
+- **Delivery Fee**: ₹10 (only for orders below ₹100)
+- **Loyalty Points**: Earn 0.5 points per ₹100 spent, 1 point = ₹1 discount
+- **Time Slot System**: Available slots shown based on current time
 - **Vendor Limitation**: Cart can only contain items from one vendor at a time
 - **Batch Delivery**: Orders grouped by vendor and slot for efficient delivery
 
