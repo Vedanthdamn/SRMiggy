@@ -37,6 +37,9 @@ public class OrderService {
     @Autowired
     private LoyaltyService loyaltyService;
 
+    @Autowired
+    private WalletService walletService;
+
     private static final Double MINIMUM_ORDER_VALUE = 100.0;
     private static final Double PLATFORM_FEE = 2.0;
     private static final Double DELIVERY_FEE = 10.0;
@@ -116,6 +119,20 @@ public class OrderService {
         // Calculate and save loyalty points earned from this order
         Double pointsEarned = loyaltyService.calculatePointsEarned(subtotal);
         order.setLoyaltyPointsEarned(pointsEarned);
+
+        // Handle payment method
+        String paymentMethod = request.getPaymentMethod();
+        if (paymentMethod != null && paymentMethod.equalsIgnoreCase("wallet")) {
+            // For wallet payment, deduct from wallet and mark order as CONFIRMED
+            walletService.deductMoney(username, total, "Payment for Order");
+            order.setStatus(OrderStatus.CONFIRMED);
+            
+            // Award loyalty points immediately for wallet payment
+            if (pointsEarned > 0) {
+                loyaltyService.addLoyaltyPoints(username, pointsEarned);
+            }
+        }
+        // For card, upi, cod, or other methods, order stays PENDING until payment is processed
 
         return orderRepository.save(order);
     }

@@ -79,10 +79,10 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      // Create order
+      // Create order with payment method
       const orderData = {
         vendorId,
-        slotId: parseInt(selectedSlot),
+        slotId: selectedSlot, // Keep as UUID string
         deliveryAddress,
         customerPhone,
         items: cart.map(item => ({
@@ -90,19 +90,39 @@ const Checkout = () => {
           quantity: item.quantity,
         })),
         useLoyaltyPoints: useLoyaltyPoints,
+        paymentMethod: paymentMethod, // Add payment method to order
       };
 
       const orderResponse = await orderAPI.create(orderData);
       const orderId = orderResponse.data.id;
+      const newOrder = orderResponse.data;
 
+      // For wallet payment, order is already confirmed and paid
       if (paymentMethod === 'wallet') {
-        // Pay with wallet
-        await paymentAPI.payWithWallet(orderId);
+        // Clear cart and navigate to success page
+        clearCart();
+        navigate(`/order-success/${orderId}`, { 
+          state: { 
+            paymentMethod,
+            order: newOrder,
+            message: 'Order placed successfully! Payment deducted from wallet.'
+          } 
+        });
       } else if (paymentMethod === 'cod') {
         // For COD, confirm the order and create payment transaction
         await paymentAPI.confirmCOD(orderId);
+        
+        // Clear cart and navigate to success page
+        clearCart();
+        navigate(`/order-success/${orderId}`, { 
+          state: { 
+            paymentMethod,
+            order: newOrder,
+            message: 'Order placed successfully! Pay cash on delivery.'
+          } 
+        });
       } else {
-        // Create payment order for online payment
+        // Create payment order for online payment (card/UPI/mock)
         const paymentResponse = await paymentAPI.createOrder(orderId);
         const { providerOrderId } = paymentResponse.data;
 
@@ -116,13 +136,17 @@ const Checkout = () => {
           providerPaymentId: mockPaymentId,
           providerSignature: mockSignature,
         });
-      }
 
-      // Clear cart and navigate to success page
-      clearCart();
-      navigate(`/order-success/${orderId}`, { 
-        state: { paymentMethod } 
-      });
+        // Clear cart and navigate to success page
+        clearCart();
+        navigate(`/order-success/${orderId}`, { 
+          state: { 
+            paymentMethod,
+            order: newOrder,
+            message: 'Order placed successfully! Payment completed.'
+          } 
+        });
+      }
     } catch (error) {
       console.error('Error placing order:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Unknown error occurred';
