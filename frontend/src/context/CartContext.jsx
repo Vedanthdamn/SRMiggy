@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
       setCart(JSON.parse(savedCart));
     }
     if (savedVendorId) {
-      setVendorId(Number(savedVendorId));
+      setVendorId(savedVendorId); // Keep as string (UUID)
     }
   }, []);
 
