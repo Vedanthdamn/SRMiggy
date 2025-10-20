@@ -6,6 +6,8 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const paymentMethod = location.state?.paymentMethod || 'online';
+  const orderData = location.state?.order;
+  const message = location.state?.message || 'Order placed successfully!';
   const mapRef = useRef(null);
   const hostelPositionRef = useRef({ lat: 12.9786, lng: 77.6000 });
   const [riderPosition, setRiderPosition] = useState({ lat: 12.9716, lng: 77.5946 });
@@ -122,15 +124,12 @@ const OrderSuccess = () => {
 
   // Get success message based on payment method
   const getSuccessMessage = () => {
-    if (paymentMethod === 'wallet') {
-      return '✅ Order Placed – Thank You!';
-    }
-    return '✅ Order Placed Successfully';
+    return 'Order placed successfully!';
   };
 
   const getPaymentMessage = () => {
     if (paymentMethod === 'wallet') {
-      return 'Payment has been deducted from your wallet.';
+      return 'Payment has been deducted from your wallet. Check your wallet balance for updated amount.';
     } else if (paymentMethod === 'cod') {
       return 'Payment will be collected on delivery.';
     }
@@ -163,6 +162,11 @@ const OrderSuccess = () => {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             {getSuccessMessage()}
           </h1>
+          {message && (
+            <div className="mb-3 text-green-600 dark:text-green-400 font-semibold text-base">
+              ✅ {message}
+            </div>
+          )}
           <p className="text-gray-600 dark:text-gray-400 mb-4 text-lg">
             Your order <span className="font-bold text-primary-600 dark:text-orange-400">#{orderId}</span> has been confirmed!
           </p>
@@ -178,7 +182,7 @@ const OrderSuccess = () => {
               <span className="mr-2">🚚</span> Live Delivery Tracking
             </h2>
             <p className="text-center text-green-600 dark:text-green-400 font-semibold mt-2 text-lg animate-pulse">
-              🛵 Your order is on the way and will reach in 30 minutes
+              🛵 Your order is on the way — arriving in 20 minutes
             </p>
           </div>
           
@@ -203,7 +207,7 @@ const OrderSuccess = () => {
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 p-4 rounded-xl text-center border border-blue-200 dark:border-blue-700">
               <div className="text-3xl mb-2">⏱️</div>
               <p className="text-sm text-gray-600 dark:text-gray-400">ETA</p>
-              <p className="text-xl font-bold text-blue-600 dark:text-blue-400">30 mins</p>
+              <p className="text-xl font-bold text-blue-600 dark:text-blue-400">20 mins</p>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 p-4 rounded-xl text-center border border-green-200 dark:border-green-700">
               <div className="text-3xl mb-2">📍</div>
