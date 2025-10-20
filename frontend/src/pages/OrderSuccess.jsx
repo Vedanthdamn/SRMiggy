@@ -6,7 +6,6 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const paymentMethod = location.state?.paymentMethod || 'online';
-  const orderData = location.state?.order;
   const message = location.state?.message || 'Order placed successfully!';
   const mapRef = useRef(null);
   const hostelPositionRef = useRef({ lat: 12.9786, lng: 77.6000 });
