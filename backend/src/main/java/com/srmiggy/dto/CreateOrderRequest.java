@@ -17,4 +17,5 @@ public class CreateOrderRequest {
     private String customerPhone;
     private List<CartItemRequest> items;
     private Boolean useLoyaltyPoints = false;
+    private String paymentMethod; // "wallet", "card", "upi", "cod", or "mock"
 }
