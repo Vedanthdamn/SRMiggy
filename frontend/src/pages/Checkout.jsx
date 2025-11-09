@@ -223,7 +223,7 @@ const Checkout = () => {
                     <span className="text-3xl mr-2">⏰</span> Ordering Closed for Today
                   </div>
                   <p className="text-gray-800 dark:text-gray-200 font-medium">
-                    Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">11 AM – 7 PM</span> to place your order.
+                    Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">8 AM – 9 PM</span> to place your order.
                   </p>
                 </div>
               ) : slots.length === 0 ? (
@@ -232,7 +232,7 @@ const Checkout = () => {
                     <span className="text-3xl mr-2">⚠️</span> No Available Slots
                   </div>
                   <p className="text-gray-800 dark:text-gray-200 font-medium">
-                    All delivery slots for today have passed. Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">11 AM – 7 PM</span>.
+                    All delivery slots for today have passed. Please come back tomorrow between <span className="font-bold text-primary-600 dark:text-orange-400">8 AM – 9 PM</span>.
                   </p>
                 </div>
               ) : (
