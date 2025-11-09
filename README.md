@@ -37,8 +37,8 @@ SRMiggy is a full-stack food delivery website designed for SRM students to order
 - **Real-time Calculations**: Total updates dynamically as you add/remove items
 - **Fee Transparency**: Clear breakdown showing subtotal, delivery fee, platform fee, and total
 
-### ⏰ Time-Based Ordering (11 AM – 7 PM)
-- **Operating Hours**: Orders accepted only between 11 AM and 7 PM
+### ⏰ Time-Based Ordering (8 AM – 9 PM)
+- **Operating Hours**: Orders accepted only between 8 AM and 9 PM
 - **Dynamic Slot Display**: Shows only available delivery slots based on current time
 - **Ordering Window**: System automatically detects if ordering is closed
 - **Smart Scheduling**: Backend validates slot availability in real-time
@@ -210,7 +210,7 @@ The application comes with pre-seeded data for testing:
 
 ## 🎯 Business Rules
 
-- **Operating Hours**: 11 AM – 7 PM daily for order placement
+- **Operating Hours**: 8 AM – 9 PM daily for order placement
 - **Minimum Order**: ₹100 (orders below this incur ₹10 delivery fee)
 - **Platform Fee**: ₹2 (automatically added to all orders)
 - **Delivery Fee**: ₹10 (only for orders below ₹100)
